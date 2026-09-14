@@ -18,6 +18,8 @@ from ktbgr.transcriber import Transcriber
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
 log = logging.getLogger("ktbgr")
 
+HOTWORDS_MAX_CHARS = 200
+
 
 class KTBGRBot(discord.Client):
     def __init__(self):
@@ -26,7 +28,7 @@ class KTBGRBot(discord.Client):
         super().__init__(intents=intents)
         self.tree = app_commands.CommandTree(self)
         self.settings = load_settings()
-        self.matcher = KeywordMatcher.from_file(self.settings.keywords_file, self.settings.match_threshold)
+        self.matcher = self.load_matcher()
         self.transcriber = Transcriber(
             model=self.settings.model,
             device=self.settings.device,
@@ -36,9 +38,21 @@ class KTBGRBot(discord.Client):
         )
         self._update_hotwords()
 
+    def load_matcher(self) -> KeywordMatcher:
+        return KeywordMatcher.from_files(self.settings.keywords_files, self.settings.match_threshold)
+
     def _update_hotwords(self) -> None:
-        # キーワードを Whisper に事前に伝えておくと、その単語として認識されやすくなる
-        self.transcriber.hotwords = " ".join(k.name for k in self.matcher.keywords) or None
+        # キーワードを Whisper に事前に伝えておくと、その単語として認識されやすくなる。
+        # 長すぎるとかえって認識が崩れるので上限を設ける
+        words, total = [], 0
+        for k in self.matcher.keywords:
+            if not k.hotword:
+                continue
+            if total + len(k.name) > HOTWORDS_MAX_CHARS:
+                break
+            words.append(k.name)
+            total += len(k.name) + 1
+        self.transcriber.hotwords = " ".join(words) or None
 
     async def setup_hook(self) -> None:
         register_commands(self)
@@ -141,16 +155,21 @@ def register_commands(bot: KTBGRBot) -> None:
 
     @tree.command(name="keywords", description="反応するキーワードの一覧を表示します")
     async def keywords(interaction: discord.Interaction):
-        lines = [
-            f"- **{k.name}**" + (f" (別表記: {', '.join(k.aliases)})" if k.aliases else "")
-            for k in bot.matcher.keywords
-        ]
-        await interaction.response.send_message("\n".join(lines) or "キーワードが登録されていません。", ephemeral=True)
+        keywords = bot.matcher.keywords
+        header = f"有効なキーワード: {len(keywords)}件 (無効 {len(bot.matcher.all_keywords) - len(keywords)}件)\n"
+        body = ""
+        for i, k in enumerate(keywords):
+            line = f"- {discord.utils.escape_markdown(k.name)}\n"
+            if len(header) + len(body) + len(line) > 1900:  # Discord のメッセージ上限 2000 文字
+                body += f"…ほか {len(keywords) - i}件"
+                break
+            body += line
+        await interaction.response.send_message(header + body if keywords else "キーワードが登録されていません。", ephemeral=True)
 
-    @tree.command(name="reload", description="keywords.json を再読み込みします")
+    @tree.command(name="reload", description="キーワードファイルを再読み込みします")
     async def reload(interaction: discord.Interaction):
         try:
-            bot.matcher = KeywordMatcher.from_file(bot.settings.keywords_file, bot.settings.match_threshold)
+            bot.matcher = await asyncio.to_thread(bot.load_matcher)
         except Exception as e:
             await interaction.response.send_message(f"⚠️ 読み込みに失敗しました: {e}", ephemeral=True)
             return

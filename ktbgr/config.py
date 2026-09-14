@@ -49,7 +49,7 @@ class Settings:
     energy_threshold: float
 
     # キーワード検出
-    keywords_file: Path
+    keywords_files: list[Path]
     match_threshold: float
     cooldown_sec: float
 
@@ -70,7 +70,11 @@ def load_settings(argv: list[str] | None = None) -> Settings:
     )
     parser.add_argument("--model", default=os.getenv("WHISPER_MODEL", "small"))
     parser.add_argument("--compute-type", default=os.getenv("WHISPER_COMPUTE_TYPE", "default"))
-    parser.add_argument("--keywords", default=os.getenv("KEYWORDS_FILE", "keywords.json"))
+    parser.add_argument(
+        "--keywords",
+        default=os.getenv("KEYWORDS_FILE", "keywords.json,data/inmu_goroku.json"),
+        help="キーワードファイル (カンマ区切りで複数指定可)",
+    )
     args = parser.parse_args(argv)
 
     token = os.getenv("DISCORD_TOKEN", "")
@@ -93,7 +97,7 @@ def load_settings(argv: list[str] | None = None) -> Settings:
         max_segment_sec=_env_float("MAX_SEGMENT_SEC", 8.0),
         min_speech_ms=_env_int("MIN_SPEECH_MS", 250),
         energy_threshold=_env_float("ENERGY_THRESHOLD", 0.008),
-        keywords_file=Path(args.keywords),
+        keywords_files=[Path(p.strip()) for p in args.keywords.split(",") if p.strip()],
         match_threshold=_env_float("MATCH_THRESHOLD", 80.0),
         cooldown_sec=_env_float("COOLDOWN_SEC", 5.0),
         post_transcripts=_env_bool("POST_TRANSCRIPTS", False),

@@ -23,6 +23,23 @@ def test_no_false_positive():
     assert names(matcher, "今日はいい天気ですね") == []
 
 
+def test_long_vowel_small_kana_and_repeats():
+    matcher = KeywordMatcher([Keyword("いいゾ～これ"), Keyword("ぬわあああああん疲れたもおおおおおん")], 100)
+    assert names(matcher, "いいぞーこれ") == ["いいゾ～これ"]
+    matcher = KeywordMatcher([Keyword("当たり前だよなぁ？")], 100)
+    assert names(matcher, "当たり前だよなあ") == ["当たり前だよなぁ？"]
+
+
+def test_utterance_shorter_than_keyword_does_not_match_partially():
+    matcher = KeywordMatcher([Keyword("まずうちさぁ、屋上…あんだけど、焼いてかない？")], 80)
+    assert names(matcher, "まずうち") == []
+
+
+def test_disabled_keyword_is_ignored():
+    matcher = KeywordMatcher([Keyword("そう…", enabled=False)], 80)
+    assert names(matcher, "そう…") == []
+
+
 def test_short_keyword_requires_exact():
     matcher = KeywordMatcher([Keyword("おつ")], 80)
     assert names(matcher, "おつー") == ["おつ"]
