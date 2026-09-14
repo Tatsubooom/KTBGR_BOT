@@ -2,11 +2,12 @@
 
 Discord の VC 内の会話をリアルタイムで文字起こしし、特定の単語 (曖昧一致) に反応する BOT です。
 
-- **discord.py** + [discord-ext-voice-recv](https://github.com/zacker150/discord-ext-voice-recv) で VC 音声を受信 (Discord の VC E2E 暗号化 = DAVE に対応)
-- **faster-whisper** で文字起こし。**GPU (CUDA) / CPU を選択可能**
-- **曖昧一致**: 表記ゆれ (漢字/ひらがな/カタカナ) や 1〜2 文字の聞き間違いがあっても反応
-- **リアルタイム重視**: 話し終わりを待たず、話している途中の音声も逐次文字起こししてキーワードを早期検出
-- **テキストチャットにも反応**: VC だけでなく、テキストチャンネルの発言にも同じキーワード・曖昧一致で返信
+- VC 音声の受信は discord.py と [discord-ext-voice-recv](https://github.com/zacker150/discord-ext-voice-recv) (Discord の VC E2E 暗号化 DAVE に対応)
+- 文字起こしは faster-whisper。GPU (CUDA) と CPU を選択できます
+- 表記ゆれ (漢字/ひらがな/カタカナ) や 1〜2 文字の聞き間違いがあっても反応します
+- 話し終わりを待たず、話している途中の音声も文字起こししてキーワードを検出します
+- テキストチャンネルの発言にも同じキーワードで反応します
+- 1回の発言で複数のキーワードを検出した場合は、コンボとして1つのメッセージにまとめます
 
 ## 仕組み
 
@@ -41,7 +42,7 @@ VC音声 (話者ごと 48kHz stereo)
 1. [Discord Developer Portal](https://discord.com/developers/applications) でアプリを作成し、Bot のトークンを取得
 2. OAuth2 → URL Generator で `bot` と `applications.commands` を選択し、権限は
    `View Channels` / `Send Messages` / `Read Message History` / `Connect` / `Speak` を付けてサーバーに招待
-3. テキストチャットに反応させる場合は、Bot ページの **Privileged Gateway Intents** で **MESSAGE CONTENT INTENT** を有効化
+3. テキストチャットに反応させる場合は、Bot ページの Privileged Gateway Intents で MESSAGE CONTENT INTENT を有効化
    (使わない場合は `.env` で `TEXT_CHAT=false`。有効化せずに `TEXT_CHAT=true` のまま起動するとログインに失敗します)
 
 ### 2. インストール
@@ -111,7 +112,7 @@ python bot.py --device cpu --model base
       "name": "お疲れ様",
       "aliases": ["おつかれ", "おつ"],
       "threshold": 80,
-      "reply": "🍵 {name}さん、お疲れ様です！",
+      "reply": "{name}さん、お疲れ様です",
       "sound": "sounds/otsukare.mp3"
     }
   ]
@@ -125,26 +126,13 @@ python bot.py --device cpu --model base
 | `threshold` | | このキーワードだけの一致しきい値 (未指定なら `MATCH_THRESHOLD`) |
 | `reply` | | 反応メッセージ。`{user}` (メンション) `{name}` (表示名) `{keyword}` `{text}` (文字起こし) が使えます |
 | `sound` | | VC で再生する音声ファイル (要 FFmpeg) |
-
+| `label` | | コンボ表示での表記 (未指定なら `name`) |
 | `enabled` | | `false` にすると検出しない |
 | `hotword` | | `false` にすると Whisper への認識ヒントに含めない |
 
 編集後は `/reload` で再起動なしに反映できます。キーワードは Whisper にもヒントとして渡されるため、固有名詞も認識されやすくなります (合計 200 文字まで)。
 
 キーワードファイルは `.env` の `KEYWORDS_FILE` にカンマ区切りで複数指定できます (デフォルト: `keywords.json,data/inmu_goroku.json`)。
-
-## 淫夢語録データ (`data/inmu_goroku.json`)
-
-[真夏の夜の淫夢Wiki](https://wiki.yjsnpi.nu/wiki/%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA:%E6%B7%AB%E5%A4%A2%E8%AA%9E%E9%8C%B2) の「カテゴリ:淫夢語録」配下 (人物別・五十音順などのサブカテゴリ含む) から収集した語録 **447件** を収録しています。
-
-- 語録ページへのリダイレクト (表記ゆれ)・`{{コピペ用}}` の簡易表記・読み方を別表記として登録
-- 「（困惑）」「（棒読み）」などの注釈は発話されないので検出対象から除外 (反応メッセージには元のタイトルを表示)
-- 表記の短さに応じて誤爆対策
-  - 読みが 4 文字未満 (「は？」「あっ…」「ファッ⁉」など 39件): `enabled: false` (日常会話で反応しすぎるため)
-  - 6 文字未満: 完全一致のみ / 10 文字未満: しきい値 88 / それ以上: `MATCH_THRESHOLD`
-- 反応メッセージは「🎯 {発言した人}「{文字起こし}」→ 淫夢語録: **タイトル（発言者）**」
-
-「そうだよ」「ないです」など普段の会話にも出る語録は反応しやすいので、うるさい場合は該当エントリに `"enabled": false` を付けてください。
 
 ### データの更新
 
@@ -163,6 +151,21 @@ python scripts/fetch_inmu_goroku.py --refresh
 - 他の BOT の発言には反応しません
 - BOT がそのサーバーの VC に接続中なら、`sound` の効果音も VC で再生します
 
+## コンボ
+
+1回の発言で複数のキーワードを検出すると、1つのメッセージにまとめて送ります。発言内で同じ箇所に複数のキーワードが一致した場合は、一番近いものだけを数えます。
+
+```
+テスター 3コンボ
+「頭にきますよ、当たり前だよなぁ？やりますねぇ」
+1. 頭にきますよ（野獣先輩）
+2. 当たり前だよなぁ？（MUR）
+3. やりますねぇ！（野獣先輩）
+```
+
+- テキストチャット: 1つのメッセージ内の検出をまとめます
+- VC: 同じ人が `COMBO_WINDOW_SEC` (デフォルト 8 秒) 以内に続けて検出されると、前の反応メッセージを編集してコンボを続けます。発言が複数にまたがる場合は、行ごとに発言を表示します (0 で無効)
+
 ## コマンド
 
 | コマンド | 説明 |
@@ -176,10 +179,12 @@ python scripts/fetch_inmu_goroku.py --refresh
 
 ## 調整のヒント
 
-- **反応が遅い** → `SILENCE_MS` / `PARTIAL_INTERVAL_MS` を下げる、モデルを小さくする、GPU を使う
-- **誤反応が多い** → `MATCH_THRESHOLD` を上げる (85〜90)、キーワード単位で `threshold` を設定
-- **反応しない** → `MATCH_THRESHOLD` を下げる (70〜75)、`aliases` に聞き間違えやすい表記を追加
-- **物音や呼吸音で文字起こしされる** → `ENERGY_THRESHOLD` / `MIN_SPEECH_MS` を上げる
+| 症状 | 対処 |
+|---|---|
+| 反応が遅い | `SILENCE_MS` / `PARTIAL_INTERVAL_MS` を下げる、モデルを小さくする、GPU を使う |
+| 誤反応が多い | `MATCH_THRESHOLD` を上げる (80〜90)、キーワード単位で `threshold` を設定 |
+| 反応しない | `MATCH_THRESHOLD` を下げる (60〜65)、`aliases` に聞き間違えやすい表記を追加 |
+| 物音や呼吸音で文字起こしされる | `ENERGY_THRESHOLD` / `MIN_SPEECH_MS` を上げる |
 
 ## テスト
 
