@@ -53,6 +53,10 @@ class Settings:
     match_threshold: float
     cooldown_sec: float
 
+    # テキストチャット
+    text_chat: bool
+    text_channel_ids: set[int]  # 空なら全チャンネル
+
     # 出力
     post_transcripts: bool
     response_channel_id: int | None
@@ -100,6 +104,8 @@ def load_settings(argv: list[str] | None = None) -> Settings:
         keywords_files=[Path(p.strip()) for p in args.keywords.split(",") if p.strip()],
         match_threshold=_env_float("MATCH_THRESHOLD", 80.0),
         cooldown_sec=_env_float("COOLDOWN_SEC", 5.0),
+        text_chat=_env_bool("TEXT_CHAT", True),
+        text_channel_ids={int(c) for c in os.getenv("TEXT_CHANNEL_IDS", "").split(",") if c.strip()},
         post_transcripts=_env_bool("POST_TRANSCRIPTS", False),
         response_channel_id=int(response_channel_id) if response_channel_id else None,
     )

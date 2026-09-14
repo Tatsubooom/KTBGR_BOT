@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import time
 from pathlib import Path
 
 import discord
@@ -25,9 +26,12 @@ class KTBGRBot(discord.Client):
     def __init__(self):
         intents = discord.Intents.default()
         intents.voice_states = True
+        self.settings = load_settings()
+        # テキストチャットの内容を読むには Developer Portal で MESSAGE CONTENT INTENT を有効にする必要がある
+        intents.message_content = self.settings.text_chat
         super().__init__(intents=intents)
         self.tree = app_commands.CommandTree(self)
-        self.settings = load_settings()
+        self._text_last_fired: dict[tuple[int, str], float] = {}
         self.matcher = self.load_matcher()
         self.transcriber = Transcriber(
             model=self.settings.model,
@@ -72,6 +76,52 @@ class KTBGRBot(discord.Client):
         if vc and vc.channel and not any(not m.bot for m in vc.channel.members):
             await vc.disconnect()
 
+    async def on_message(self, message: discord.Message) -> None:
+        s = self.settings
+        if not s.text_chat or message.author.bot or not message.content:
+            return
+        if s.text_channel_ids and message.channel.id not in s.text_channel_ids:
+            return
+
+        matches = await asyncio.to_thread(self.matcher.find, message.content)
+        now = time.monotonic()
+        vc = message.guild.voice_client if message.guild else None
+        for match in matches:
+            key = (message.author.id, match.keyword.name)
+            if now - self._text_last_fired.get(key, 0.0) < s.cooldown_sec:
+                continue
+            self._text_last_fired[key] = now
+            log.info(
+                "検出(テキスト): %s <- %s「%s」(score=%.0f, %s)",
+                match.keyword.name, message.author, message.content, match.score, match.variant,
+            )
+            await self.react(message.author, message.content, match, message, vc)
+
+    async def react(
+        self,
+        user: discord.abc.User,
+        text: str,
+        match: Match,
+        destination: discord.abc.Messageable | discord.Message,
+        vc: discord.VoiceClient | None,
+    ) -> None:
+        """キーワード検出時の反応。destination が Message ならその発言への返信として送る。"""
+        keyword = match.keyword
+        if keyword.reply:
+            content = keyword.reply.format(user=user.mention, name=user.display_name, keyword=keyword.name, text=text)
+            content = content[:2000]  # Discord のメッセージ上限
+            # 発言内容をそのまま載せるので @everyone やロールメンションは無効化する
+            allowed = discord.AllowedMentions(everyone=False, roles=False, users=True)
+            if isinstance(destination, discord.Message):
+                await destination.reply(content, mention_author=False, allowed_mentions=allowed)
+            else:
+                await destination.send(content, allowed_mentions=allowed)
+        if keyword.sound and vc is not None and vc.is_connected() and not vc.is_playing():
+            if Path(keyword.sound).is_file():
+                vc.play(discord.FFmpegPCMAudio(keyword.sound))
+            else:
+                log.warning("効果音ファイルが見つかりません: %s", keyword.sound)
+
     def _response_channel(self, vc: discord.VoiceClient) -> discord.abc.Messageable:
         if self.settings.response_channel_id:
             channel = self.get_channel(self.settings.response_channel_id)
@@ -90,15 +140,7 @@ class KTBGRBot(discord.Client):
             vc.stop_listening()
 
         async def on_detect(user, text: str, match: Match) -> None:
-            keyword = match.keyword
-            if keyword.reply:
-                message = keyword.reply.format(user=user.mention, name=user.display_name, keyword=keyword.name, text=text)
-                await self._response_channel(vc).send(message)
-            if keyword.sound and vc.is_connected() and not vc.is_playing():
-                if Path(keyword.sound).is_file():
-                    vc.play(discord.FFmpegPCMAudio(keyword.sound))
-                else:
-                    log.warning("効果音ファイルが見つかりません: %s", keyword.sound)
+            await self.react(user, text, match, self._response_channel(vc), vc)
 
         async def on_transcript(user, text: str) -> None:
             await self._response_channel(vc).send(f"**{user.display_name}**: {text}")

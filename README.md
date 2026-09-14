@@ -6,6 +6,7 @@ Discord の VC 内の会話をリアルタイムで文字起こしし、特定�
 - **faster-whisper** で文字起こし。**GPU (CUDA) / CPU を選択可能**
 - **曖昧一致**: 表記ゆれ (漢字/ひらがな/カタカナ) や 1〜2 文字の聞き間違いがあっても反応
 - **リアルタイム重視**: 話し終わりを待たず、話している途中の音声も逐次文字起こししてキーワードを早期検出
+- **テキストチャットにも反応**: VC だけでなく、テキストチャンネルの発言にも同じキーワード・曖昧一致で返信
 
 ## 仕組み
 
@@ -39,7 +40,9 @@ VC音声 (話者ごと 48kHz stereo)
 
 1. [Discord Developer Portal](https://discord.com/developers/applications) でアプリを作成し、Bot のトークンを取得
 2. OAuth2 → URL Generator で `bot` と `applications.commands` を選択し、権限は
-   `View Channels` / `Send Messages` / `Connect` / `Speak` を付けてサーバーに招待
+   `View Channels` / `Send Messages` / `Read Message History` / `Connect` / `Speak` を付けてサーバーに招待
+3. テキストチャットに反応させる場合は、Bot ページの **Privileged Gateway Intents** で **MESSAGE CONTENT INTENT** を有効化
+   (使わない場合は `.env` で `TEXT_CHAT=false`。有効化せずに `TEXT_CHAT=true` のまま起動するとログインに失敗します)
 
 ### 2. インストール
 
@@ -150,6 +153,15 @@ python scripts/fetch_inmu_goroku.py --refresh
 ```
 
 取得結果は `.cache/` にキャッシュされ、`--refresh` なしの場合はキャッシュからデータだけ再生成します (しきい値のルールを変えたときなど)。
+
+## テキストチャット
+
+`TEXT_CHAT=true` (デフォルト) の場合、BOT が見えるテキストチャンネルの発言にも反応し、その発言への返信として `reply` を送ります。`/join` しなくても動作します。
+
+- 反応するチャンネルを絞るには `TEXT_CHANNEL_IDS=123,456` のように指定
+- 同じ人・同じキーワードの連続反応は `COOLDOWN_SEC` で抑制 (VC とは別に管理)
+- 他の BOT の発言には反応しません
+- BOT がそのサーバーの VC に接続中なら、`sound` の効果音も VC で再生します
 
 ## コマンド
 
