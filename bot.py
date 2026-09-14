@@ -21,6 +21,8 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(na
 log = logging.getLogger("ktbgr")
 
 HOTWORDS_MAX_CHARS = 200
+# View Channels / Send Messages / Read Message History / Connect / Speak
+INVITE_PERMISSIONS = 1024 | 2048 | 65536 | 1048576 | 2097152
 # 発言内容をそのまま載せるので @everyone やロールメンションは無効化する
 ALLOWED_MENTIONS = discord.AllowedMentions(everyone=False, roles=False, users=True)
 
@@ -74,6 +76,13 @@ class KTBGRBot(discord.Client):
 
     async def on_ready(self) -> None:
         log.info("ログイン: %s (device=%s)", self.user, self.transcriber.device)
+        if not self.guilds:
+            app = await self.application_info()
+            log.warning(
+                "BOT がどのサーバーにも参加していません。次の URL から招待してください: "
+                "https://discord.com/oauth2/authorize?client_id=%s&scope=bot+applications.commands&permissions=%d",
+                app.id, INVITE_PERMISSIONS,
+            )
 
     async def on_voice_state_update(self, member, before, after) -> None:
         # BOT以外が誰もいなくなったら自動退出
@@ -252,7 +261,17 @@ def register_commands(bot: KTBGRBot) -> None:
 
 def main() -> None:
     bot = KTBGRBot()
-    bot.run(bot.settings.token, log_handler=None)
+    try:
+        bot.run(bot.settings.token, log_handler=None)
+    except discord.PrivilegedIntentsRequired:
+        log.error(
+            "MESSAGE CONTENT INTENT が有効になっていません。Developer Portal の Bot ページで有効にするか、"
+            ".env で TEXT_CHAT=false にしてください。"
+        )
+        raise SystemExit(1)
+    except discord.LoginFailure:
+        log.error("DISCORD_TOKEN が正しくありません。Developer Portal でトークンを確認してください。")
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":
