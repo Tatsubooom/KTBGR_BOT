@@ -52,6 +52,7 @@ class Settings:
     keywords_files: list[Path]
     match_threshold: float
     cooldown_sec: float
+    combo_window_sec: float  # VC でこの秒数以内に続けて検出したらコンボ継続 (0で無効)
 
     # テキストチャット
     text_chat: bool
@@ -104,6 +105,7 @@ def load_settings(argv: list[str] | None = None) -> Settings:
         keywords_files=[Path(p.strip()) for p in args.keywords.split(",") if p.strip()],
         match_threshold=_env_float("MATCH_THRESHOLD", 70.0),
         cooldown_sec=_env_float("COOLDOWN_SEC", 5.0),
+        combo_window_sec=_env_float("COMBO_WINDOW_SEC", 8.0),
         text_chat=_env_bool("TEXT_CHAT", True),
         text_channel_ids={int(c) for c in os.getenv("TEXT_CHANNEL_IDS", "").split(",") if c.strip()},
         post_transcripts=_env_bool("POST_TRANSCRIPTS", False),

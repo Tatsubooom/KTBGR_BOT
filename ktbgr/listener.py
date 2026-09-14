@@ -29,7 +29,7 @@ SAMPLE_RATE = 16000
 FRAME_MS = 20
 PREROLL_FRAMES = 10  # 発話開始前の 200ms も含めて頭切れを防ぐ
 
-DetectCallback = Callable[[object, str, Match], Awaitable[None]]
+DetectCallback = Callable[[object, str, list[Match]], Awaitable[None]]
 TranscriptCallback = Callable[[object, str], Awaitable[None]]
 
 
@@ -215,18 +215,25 @@ class SpeechSink(voice_recv.AudioSink):
 
         key = (job.user.id, job.utterance_id)
         now = time.monotonic()
-        for match in self.get_matcher().find(text):
-            name = match.keyword.name
-            with self._lock:
-                fired = self._triggered.setdefault(key, set())
+        new_matches: list[Match] = []
+        with self._lock:
+            fired = self._triggered.setdefault(key, set())
+            for match in self.get_matcher().find(text):
+                name = match.keyword.name
                 last = self._last_fired.get((job.user.id, name), 0.0)
                 if name in fired or now - last < self.settings.cooldown_sec:
                     continue
                 fired.add(name)
                 self._last_fired[(job.user.id, name)] = now
-            log.info("検出: %s <- %s「%s」(score=%.0f, %s)", name, job.user, text, match.score, match.variant)
-            asyncio.run_coroutine_threadsafe(self.on_detect(job.user, text, match), self.loop)
-            break  # 検出がゆるいので複数一致しても反応は一番スコアの高いもの1件だけ
+                new_matches.append(match)
+
+        if new_matches:
+            log.info(
+                "検出: %s <- %s「%s」%s",
+                [m.keyword.name for m in new_matches], job.user, text,
+                [(round(m.score), m.variant) for m in new_matches],
+            )
+            asyncio.run_coroutine_threadsafe(self.on_detect(job.user, text, new_matches), self.loop)
 
         self._finish(job)
 

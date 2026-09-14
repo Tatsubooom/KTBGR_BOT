@@ -195,6 +195,7 @@ def build_entry(title: str, page: dict) -> dict:
     label = f"{title}（{speaker}）" if speaker else title
     label = label.replace("{", "{{").replace("}", "}}")
     entry["reply"] = "🎯 {name}「{text}」\n→ 淫夢語録: **" + label + "**"
+    entry["label"] = f"**{title}**（{speaker}）" if speaker else f"**{title}**"  # コンボ表示用 (format しない)
     return entry
 
 

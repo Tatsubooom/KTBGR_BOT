@@ -11,6 +11,7 @@ import discord
 from discord import app_commands
 from discord.ext import voice_recv
 
+from ktbgr.combo import ComboState, build_message, hits_in_order
 from ktbgr.config import DEVICES, load_settings
 from ktbgr.listener import SpeechSink
 from ktbgr.matcher import KeywordMatcher, Match
@@ -20,6 +21,8 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(na
 log = logging.getLogger("ktbgr")
 
 HOTWORDS_MAX_CHARS = 200
+# 発言内容をそのまま載せるので @everyone やロールメンションは無効化する
+ALLOWED_MENTIONS = discord.AllowedMentions(everyone=False, roles=False, users=True)
 
 
 class KTBGRBot(discord.Client):
@@ -32,6 +35,8 @@ class KTBGRBot(discord.Client):
         super().__init__(intents=intents)
         self.tree = app_commands.CommandTree(self)
         self._text_last_fired: dict[tuple[int, str], float] = {}
+        self._voice_combos: dict[tuple[int, int], ComboState] = {}
+        self._combo_lock = asyncio.Lock()
         self.matcher = self.load_matcher()
         self.transcriber = Transcriber(
             model=self.settings.model,
@@ -86,42 +91,56 @@ class KTBGRBot(discord.Client):
         matches = await asyncio.to_thread(self.matcher.find, message.content)
         now = time.monotonic()
         vc = message.guild.voice_client if message.guild else None
+        fresh = []
         for match in matches:
             key = (message.author.id, match.keyword.name)
             if now - self._text_last_fired.get(key, 0.0) < s.cooldown_sec:
                 continue
             self._text_last_fired[key] = now
+            fresh.append(match)
+        if fresh:
             log.info(
-                "検出(テキスト): %s <- %s「%s」(score=%.0f, %s)",
-                match.keyword.name, message.author, message.content, match.score, match.variant,
+                "検出(テキスト): %s <- %s「%s」%s",
+                [m.keyword.name for m in fresh], message.author, message.content,
+                [(round(m.score), m.variant) for m in fresh],
             )
-            await self.react(message.author, message.content, match, message, vc)
-            break  # 検出がゆるいので複数一致しても反応は一番スコアの高いもの1件だけ
+            # テキストは1メッセージ内の検出をコンボにまとめて返信
+            content = build_message(hits_in_order(message.content, fresh), message.author)
+            if content:
+                await message.reply(content, mention_author=False, allowed_mentions=ALLOWED_MENTIONS)
+            self.play_sound(fresh, vc)
 
-    async def react(
-        self,
-        user: discord.abc.User,
-        text: str,
-        match: Match,
-        destination: discord.abc.Messageable | discord.Message,
-        vc: discord.VoiceClient | None,
-    ) -> None:
-        """キーワード検出時の反応。destination が Message ならその発言への返信として送る。"""
-        keyword = match.keyword
-        if keyword.reply:
-            content = keyword.reply.format(user=user.mention, name=user.display_name, keyword=keyword.name, text=text)
-            content = content[:2000]  # Discord のメッセージ上限
-            # 発言内容をそのまま載せるので @everyone やロールメンションは無効化する
-            allowed = discord.AllowedMentions(everyone=False, roles=False, users=True)
-            if isinstance(destination, discord.Message):
-                await destination.reply(content, mention_author=False, allowed_mentions=allowed)
+    async def react_voice(self, vc: discord.VoiceClient, user, text: str, matches: list[Match]) -> None:
+        """VC での検出。同じ人が COMBO_WINDOW_SEC 以内に続けて語録を言ったら、前のメッセージを編集してコンボを伸ばす。"""
+        channel = self._response_channel(vc)
+        key = (channel.id, user.id)
+        async with self._combo_lock:
+            now = time.monotonic()
+            state = self._voice_combos.get(key)
+            window = self.settings.combo_window_sec
+            if state is None or window <= 0 or now - state.last_time > window:
+                state = self._voice_combos[key] = ComboState()
+            state.hits += hits_in_order(text, matches)
+            state.last_time = now
+
+            content = build_message(state.hits, user)
+            if content:
+                if state.message is not None:
+                    try:
+                        await state.message.edit(content=content, allowed_mentions=ALLOWED_MENTIONS)
+                    except discord.HTTPException:
+                        state.message = None  # 消されていたら送り直す
+                if state.message is None:
+                    state.message = await channel.send(content, allowed_mentions=ALLOWED_MENTIONS)
+        self.play_sound(matches, vc)
+
+    def play_sound(self, matches: list[Match], vc: discord.VoiceClient | None) -> None:
+        sound = next((m.keyword.sound for m in matches if m.keyword.sound), None)
+        if sound and vc is not None and vc.is_connected() and not vc.is_playing():
+            if Path(sound).is_file():
+                vc.play(discord.FFmpegPCMAudio(sound))
             else:
-                await destination.send(content, allowed_mentions=allowed)
-        if keyword.sound and vc is not None and vc.is_connected() and not vc.is_playing():
-            if Path(keyword.sound).is_file():
-                vc.play(discord.FFmpegPCMAudio(keyword.sound))
-            else:
-                log.warning("効果音ファイルが見つかりません: %s", keyword.sound)
+                log.warning("効果音ファイルが見つかりません: %s", sound)
 
     def _response_channel(self, vc: discord.VoiceClient) -> discord.abc.Messageable:
         if self.settings.response_channel_id:
@@ -140,8 +159,8 @@ class KTBGRBot(discord.Client):
         if vc.is_listening():
             vc.stop_listening()
 
-        async def on_detect(user, text: str, match: Match) -> None:
-            await self.react(user, text, match, self._response_channel(vc), vc)
+        async def on_detect(user, text: str, matches: list[Match]) -> None:
+            await self.react_voice(vc, user, text, matches)
 
         async def on_transcript(user, text: str) -> None:
             await self._response_channel(vc).send(f"**{user.display_name}**: {text}")
