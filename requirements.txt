@@ -1,0 +1,7 @@
+# DAVE (VCのE2E暗号化) 対応の音声受信拡張。互換性のある discord.py も一緒にインストールされる
+discord-ext-voice-recv @ git+https://github.com/zacker150/discord-ext-voice-recv
+faster-whisper>=1.2
+rapidfuzz>=3.9
+pykakasi>=2.3
+python-dotenv>=1.0
+numpy>=1.26

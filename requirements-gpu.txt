@@ -1,0 +1,4 @@
+# GPU (NVIDIA CUDA 12) で動かす場合に追加でインストール
+-r requirements.txt
+nvidia-cublas-cu12
+nvidia-cudnn-cu12==9.*
