@@ -3,21 +3,21 @@
     {
       "name": "おはよう",
       "aliases": ["おはようございます"],
-      "reply": "☀️ おはようございます、{name}さん！"
+      "reply": "おはようございます、{name}さん"
     },
     {
       "name": "お疲れ様",
       "aliases": ["おつかれ", "おつ"],
-      "reply": "🍵 {name}さん、お疲れ様です！"
+      "reply": "{name}さん、お疲れ様です"
     },
     {
       "name": "ラーメン",
       "threshold": 75,
-      "reply": "🍜 {name}さんがラーメンの話をしています「{text}」"
+      "reply": "{name}「{text}」\nラーメンの話をしています"
     },
     {
       "name": "寝落ち",
-      "reply": "💤 {name}さん、寝落ちには気をつけて…",
+      "reply": "{name}さん、寝落ちに注意してください",
       "sound": null
     }
   ]

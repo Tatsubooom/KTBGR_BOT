@@ -163,7 +163,7 @@ class KTBGRBot(discord.Client):
             await self.react_voice(vc, user, text, matches)
 
         async def on_transcript(user, text: str) -> None:
-            await self._response_channel(vc).send(f"**{user.display_name}**: {text}")
+            await self._response_channel(vc).send(f"{user.display_name}: {text}", allowed_mentions=ALLOWED_MENTIONS)
 
         sink = SpeechSink(
             settings=self.settings,
@@ -189,7 +189,7 @@ def register_commands(bot: KTBGRBot) -> None:
         await interaction.response.defer(thinking=True)
         await bot.start_listening(voice.channel)
         await interaction.followup.send(
-            f"🎙️ {voice.channel.mention} で聞き取りを開始しました (device: `{bot.transcriber.device}`)"
+            f"{voice.channel.mention} で聞き取りを開始しました (デバイス: {bot.transcriber.device})"
         )
 
     @tree.command(name="leave", description="VCから退出します")
@@ -199,7 +199,7 @@ def register_commands(bot: KTBGRBot) -> None:
             await interaction.response.send_message("VCに参加していません。", ephemeral=True)
             return
         await vc.disconnect()
-        await interaction.response.send_message("👋 退出しました")
+        await interaction.response.send_message("VCから退出しました")
 
     @tree.command(name="device", description="文字起こしに使うデバイス (GPU/CPU) を切り替えます")
     @app_commands.describe(device="auto: GPUがあればGPU / cuda: GPU / cpu: CPU")
@@ -209,10 +209,10 @@ def register_commands(bot: KTBGRBot) -> None:
         try:
             await asyncio.to_thread(bot.transcriber.load, device.value, bot.settings.compute_type)
         except Exception as e:
-            await interaction.followup.send(f"⚠️ 切り替えに失敗しました: {e}\n(現在: `{bot.transcriber.device}`)")
+            await interaction.followup.send(f"切り替えに失敗しました: {e}\n現在のデバイス: {bot.transcriber.device}")
             return
         await interaction.followup.send(
-            f"✅ `{bot.transcriber.device}` ({bot.transcriber.compute_type}) に切り替えました"
+            f"デバイスを {bot.transcriber.device} ({bot.transcriber.compute_type}) に切り替えました"
         )
 
     @tree.command(name="keywords", description="反応するキーワードの一覧を表示します")
@@ -223,7 +223,7 @@ def register_commands(bot: KTBGRBot) -> None:
         for i, k in enumerate(keywords):
             line = f"- {discord.utils.escape_markdown(k.name)}\n"
             if len(header) + len(body) + len(line) > 1900:  # Discord のメッセージ上限 2000 文字
-                body += f"…ほか {len(keywords) - i}件"
+                body += f"ほか {len(keywords) - i}件"
                 break
             body += line
         await interaction.response.send_message(header + body if keywords else "キーワードが登録されていません。", ephemeral=True)
@@ -233,10 +233,10 @@ def register_commands(bot: KTBGRBot) -> None:
         try:
             bot.matcher = await asyncio.to_thread(bot.load_matcher)
         except Exception as e:
-            await interaction.response.send_message(f"⚠️ 読み込みに失敗しました: {e}", ephemeral=True)
+            await interaction.response.send_message(f"読み込みに失敗しました: {e}", ephemeral=True)
             return
         bot._update_hotwords()
-        await interaction.response.send_message(f"🔄 {len(bot.matcher.keywords)}件のキーワードを読み込みました", ephemeral=True)
+        await interaction.response.send_message(f"キーワードを{len(bot.matcher.keywords)}件読み込みました", ephemeral=True)
 
     @tree.command(name="status", description="BOTの状態を表示します")
     async def status(interaction: discord.Interaction):
@@ -244,7 +244,7 @@ def register_commands(bot: KTBGRBot) -> None:
         s = bot.settings
         await interaction.response.send_message(
             f"VC: {vc.channel.mention if vc else '未接続'}\n"
-            f"モデル: `{s.model}` / デバイス: `{bot.transcriber.device}` ({bot.transcriber.compute_type})\n"
+            f"モデル: {s.model} / デバイス: {bot.transcriber.device} ({bot.transcriber.compute_type})\n"
             f"キーワード: {len(bot.matcher.keywords)}件 / 一致しきい値: {s.match_threshold}",
             ephemeral=True,
         )
