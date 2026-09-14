@@ -226,6 +226,7 @@ class SpeechSink(voice_recv.AudioSink):
                 self._last_fired[(job.user.id, name)] = now
             log.info("検出: %s <- %s「%s」(score=%.0f, %s)", name, job.user, text, match.score, match.variant)
             asyncio.run_coroutine_threadsafe(self.on_detect(job.user, text, match), self.loop)
+            break  # 検出がゆるいので複数一致しても反応は一番スコアの高いもの1件だけ
 
         self._finish(job)
 

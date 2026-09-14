@@ -35,6 +35,12 @@ def test_utterance_shorter_than_keyword_does_not_match_partially():
     assert names(matcher, "まずうち") == []
 
 
+def test_matches_sorted_by_score():
+    matcher = KeywordMatcher([Keyword("してはいけない"), Keyword("まずうちさぁ、屋上…あんだけど、焼いてかない？")], 70)
+    found = names(matcher, "まずうちさあ屋上あるんだけど焼いていかない")
+    assert found[0] == "まずうちさぁ、屋上…あんだけど、焼いてかない？"
+
+
 def test_disabled_keyword_is_ignored():
     matcher = KeywordMatcher([Keyword("そう…", enabled=False)], 80)
     assert names(matcher, "そう…") == []

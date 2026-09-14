@@ -136,6 +136,7 @@ class KeywordMatcher:
         return cls(keywords, default_threshold)
 
     def find(self, text: str) -> list[Match]:
+        """一致したキーワードをスコアの高い順に返す。"""
         text_forms = to_forms(text)
         matches: list[Match] = []
         for keyword in self.keywords:
@@ -150,4 +151,6 @@ class KeywordMatcher:
                     break
             if best is not None and best.score >= threshold:
                 matches.append(best)
+        # 同点なら長いキーワードを優先 (より具体的な語録なので)
+        matches.sort(key=lambda m: (m.score, len(m.keyword.name)), reverse=True)
         return matches

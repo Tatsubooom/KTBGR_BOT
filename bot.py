@@ -96,6 +96,7 @@ class KTBGRBot(discord.Client):
                 match.keyword.name, message.author, message.content, match.score, match.variant,
             )
             await self.react(message.author, message.content, match, message, vc)
+            break  # 検出がゆるいので複数一致しても反応は一番スコアの高いもの1件だけ
 
     async def react(
         self,

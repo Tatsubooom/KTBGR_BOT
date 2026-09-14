@@ -35,9 +35,11 @@ USER_AGENT = "KTBGR_BOT goroku collector (https://github.com/Tatsubooom/KTBGR_BO
 CACHE = ROOT / ".cache" / "inmu_goroku_raw.json"
 
 # 読み (ひらがな・長音除去後) の長さによる扱い
-DISABLE_BELOW = 4  # これ未満は日常会話で誤爆しすぎるので無効化 (enabled: false)
-EXACT_BELOW = 6  # これ未満は完全一致のみ
-FUZZY_SHORT_BELOW = 10  # これ未満はやや厳しめのしきい値
+# 「言葉狩り」用途なので基本はゆるめ。ただし2文字以下 (「そう」「なに」など) はほぼ全発言に反応してしまうので無効
+DISABLE_BELOW = 3  # これ未満は無効化 (enabled: false)
+EXACT_BELOW = 4  # これ未満は完全一致のみ
+FUZZY_SHORT_BELOW = 7  # これ未満はやや厳しめのしきい値
+FUZZY_SHORT_THRESHOLD = 90
 
 
 def api(**params) -> dict:
@@ -179,7 +181,7 @@ def build_entry(title: str, page: dict) -> dict:
     if length < EXACT_BELOW:
         entry["threshold"] = 100
     elif length < FUZZY_SHORT_BELOW:
-        entry["threshold"] = 88
+        entry["threshold"] = FUZZY_SHORT_THRESHOLD
 
     speaker = plain(fields.get("発言者", ""))
     entry["title"] = title
