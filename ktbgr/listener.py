@@ -2,13 +2,14 @@
 
 リアルタイム性のための工夫:
 - 話者ごとにバッファし、短い無音 (SILENCE_MS) で即座に発話を確定させる
-- 話している途中でも PARTIAL_INTERVAL_MS ごとに途中経過を文字起こしし、キーワードを早期検出する
+- 話している途中でも PARTIAL_INTERVAL_MS ごとに、直近 PARTIAL_WINDOW_SEC 秒だけを文字起こしし、キーワードを早期検出する
 - 文字起こし待ちが詰まったら古い途中経過は捨て、常に最新の音声だけを処理する
 """
 
 from __future__ import annotations
 
 import asyncio
+import functools
 import logging
 import threading
 import time
@@ -20,7 +21,7 @@ import numpy as np
 from discord.ext import voice_recv
 
 from .config import Settings
-from .matcher import KeywordMatcher, Match
+from .matcher import KeywordMatcher, Match, to_forms
 from .transcriber import Transcriber
 
 log = logging.getLogger(__name__)
@@ -29,8 +30,11 @@ SAMPLE_RATE = 16000
 FRAME_MS = 20
 PREROLL_FRAMES = 10  # 発話開始前の 200ms も含めて頭切れを防ぐ
 
-DetectCallback = Callable[[object, str, list[Match]], Awaitable[None]]
-TranscriptCallback = Callable[[object, str], Awaitable[None]]
+# utterance_key: (ユーザーID, 発話ID)。同じ発話の途中経過と確定結果を結びつけるのに使う
+UtteranceKey = tuple[int, int]
+# (user, 発言, 一致, 発話キー, 照合に使った直前の発言)
+DetectCallback = Callable[[object, str, list[Match], UtteranceKey, list[str]], Awaitable[None]]
+TranscriptCallback = Callable[[object, str, UtteranceKey], Awaitable[None]]
 
 
 def pcm_to_16k_mono(pcm: bytes) -> np.ndarray:
@@ -99,6 +103,10 @@ class SpeechSink(voice_recv.AudioSink):
         self._partials: dict[int, Job] = {}  # ユーザーごとに最新の途中経過だけ保持
         self._triggered: dict[tuple[int, int], set[str]] = {}
         self._last_fired: dict[tuple[int, str], float] = {}
+        self._recent_finals: dict[int, deque[tuple[float, str, UtteranceKey]]] = {}  # ユーザーごとの直前の確定発言
+        self._skip = object()  # _next_job が「処理不要のジョブだった」ことを示す印
+        self._busy = False  # 文字起こし中か
+        self._job_sec = 1.0  # 1回の文字起こしにかかる時間 (移動平均)
         self._running = True
 
         self._monitor = threading.Thread(target=self._monitor_loop, name="stt-monitor", daemon=True)
@@ -171,9 +179,16 @@ class SpeechSink(voice_recv.AudioSink):
                     elif (
                         s.partial_interval_ms > 0
                         and enough
-                        and now - stream.last_partial >= s.partial_interval_ms / 1000
+                        # 途中経過は、前回から (間隔か、1回の文字起こし時間の1.5倍の長い方) 経ってから。
+                        # 文字起こしが追いつかない環境で途中経過を詰め込むと、確定の文字起こしが待たされて遅れる
+                        and now - stream.last_partial >= max(s.partial_interval_ms / 1000, self._job_sec * 1.5)
+                        and not self._busy
+                        and not self._finals
                     ):
-                        self._partials[uid] = Job(stream.user, stream.utterance_id, stream.audio(), False)
+                        # 途中経過は直近 PARTIAL_WINDOW_SEC 秒だけを文字起こしする。
+                        # 発話全体を毎回やり直すと、話が長くなるほど処理が重くなり遅延が溜まる
+                        audio = stream.audio()[-int(s.partial_window_sec * SAMPLE_RATE):]
+                        self._partials[uid] = Job(stream.user, stream.utterance_id, audio, False)
                         stream.last_partial = now
                         self._cond.notify()
 
@@ -185,21 +200,33 @@ class SpeechSink(voice_recv.AudioSink):
             if not self._running:
                 return None
             if self._finals:
+                self._busy = True
                 return self._finals.popleft()
-            _, job = self._partials.popitem()
+            uid, job = self._partials.popitem()
+            stream = self._streams.get(uid)
+            if stream is None or stream.utterance_id != job.utterance_id:
+                # 待っている間に発話が確定済み → 確定の文字起こしで検知するので途中経過は捨てる
+                return self._skip
+            self._busy = True
             return job
 
     def _worker_loop(self) -> None:
         while (job := self._next_job()) is not None:
+            if job is self._skip:
+                continue
             try:
                 self._process(job)
             except Exception:
                 log.exception("文字起こし処理でエラーが発生しました")
+            finally:
+                with self._lock:
+                    self._busy = False
 
     def _process(self, job: Job) -> None:
         started = time.monotonic()
         text = self.transcriber.transcribe(job.audio)
         elapsed = time.monotonic() - started
+        self._job_sec = self._job_sec * 0.7 + elapsed * 0.3
         log.debug(
             "[%s] %s (%.1fs音声 / 処理%.2fs) %s",
             "確定" if job.final else "途中", job.user, len(job.audio) / SAMPLE_RATE, elapsed, text,
@@ -208,34 +235,70 @@ class SpeechSink(voice_recv.AudioSink):
             self._finish(job)
             return
 
+        key = (job.user.id, job.utterance_id)
         if job.final:
             log.info("%s: %s", job.user, text)
             if self.on_transcript:
-                asyncio.run_coroutine_threadsafe(self.on_transcript(job.user, text), self.loop)
+                asyncio.run_coroutine_threadsafe(self.on_transcript(job.user, text, key), self.loop)
 
-        key = (job.user.id, job.utterance_id)
+        # 直前 CONTEXT_SEC 秒以内に確定した同じ人の発言とつなげて照合する。
+        # 区切りを細かくすると「ガチャン！」「ゴン！」のように1つの語録が複数の発話に分かれるため
         now = time.monotonic()
-        new_matches: list[Match] = []
+        with self._lock:
+            recent = self._recent_finals.setdefault(job.user.id, deque())
+            while recent and now - recent[0][0] > self.settings.context_sec:
+                recent.popleft()
+            context = [t for _, t, k in recent if k != key]
+
+        # 照合は数十ms かかるので、音声受信 (write) を止めないようロックの外で行う
+        combined = " ".join([*context, text])
+        found = self.get_matcher().find(combined)
+        if context:
+            # 前の発言だけで完結する一致は、そのとき反応済みなので除く
+            found = [m for m in found if m.end > self._context_boundaries(context, combined, m.variant)[-1]]
+        if job.final:
+            with self._lock:
+                recent.append((now, text, key))
+
+        groups: dict[tuple[str, ...], list[Match]] = {}
         with self._lock:
             fired = self._triggered.setdefault(key, set())
-            for match in self.get_matcher().find(text):
+            for match in found:
                 name = match.keyword.name
                 last = self._last_fired.get((job.user.id, name), 0.0)
+                # 同じ語録が続けて一致している間はクールダウンを延長する。
+                # 1つの語録が複数の発話に分かれ、前半と後半がそれぞれ一致して二重に数えるのを防ぐ
+                self._last_fired[(job.user.id, name)] = now
                 if name in fired or now - last < self.settings.cooldown_sec:
                     continue
                 fired.add(name)
-                self._last_fired[(job.user.id, name)] = now
-                new_matches.append(match)
+                # 付記するのは、一致した部分がまたがっている直前の発言だけ
+                boundaries = self._context_boundaries(context, combined, match.variant) if context else []
+                used = tuple(c for c, end in zip(context, boundaries) if end > match.start)
+                groups.setdefault(used, []).append(match)
 
-        if new_matches:
+        for used, matches in groups.items():
             log.info(
                 "検出: %s <- %s「%s」%s",
-                [m.keyword.name for m in new_matches], job.user, text,
-                [(round(m.score), m.variant) for m in new_matches],
+                [m.keyword.name for m in matches], job.user, " ".join((*used, text)),
+                [(round(m.score), m.variant) for m in matches],
             )
-            asyncio.run_coroutine_threadsafe(self.on_detect(job.user, text, new_matches), self.loop)
+            asyncio.run_coroutine_threadsafe(self.on_detect(job.user, text, matches, key, list(used)), self.loop)
 
         self._finish(job)
+
+    @staticmethod
+    @functools.lru_cache(maxsize=256)
+    def _form_length(text: str, variant: str) -> int:
+        return len(getattr(to_forms(text), variant))
+
+    def _context_boundaries(self, context: list[str], combined: str, variant: str) -> list[float]:
+        """直前の各発言が、つなげた文のどこまでを占めるか (割合)。
+
+        一致位置は表記 (surface / reading など) ごとの文字数に対する割合なので、同じ表記の文字数で計算する。
+        """
+        total = self._form_length(combined, variant) or 1
+        return [self._form_length(" ".join(context[: i + 1]), variant) / total for i in range(len(context))]
 
     def _finish(self, job: Job) -> None:
         if job.final:

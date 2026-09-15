@@ -58,6 +58,53 @@ def test_combo_across_utterances_shows_each_text():
     ]
 
 
+def test_voice_message_shows_source_utterance():
+    matcher = KeywordMatcher([Keyword("おはよう", reply="おはようございます、{name}さん")], 70)
+    hits = hits_in_order("おはよう", matcher.find("おはよう"), key=(1, 1))
+    # テキストチャット: reply のまま
+    assert build_message(hits, USER) == "おはようございます、テスターさん"
+    # VC: reply に発言が含まれていなければ付記する
+    assert build_message(hits, USER, show_source=True) == "おはようございます、テスターさん\n発言: 「おはよう」"
+
+
+def test_voice_source_includes_only_context_used():
+    matcher = KeywordMatcher([Keyword("ガチャン！ゴン！", reply="{name}「{text}」")], 70)
+    hits = hits_in_order("ゴン", matcher.find("がちゃん ゴン"), key=(1, 2), context=["がちゃん"])
+    assert build_message(hits, USER, show_source=True) == "テスター「がちゃん ゴン」"
+    assert hits[0].source == "「がちゃん」「ゴン」"
+
+
+def test_voice_message_is_updated_with_final_transcript():
+    import asyncio
+
+    import bot as botmod
+    from ktbgr.combo import ComboState
+
+    sent = []
+
+    class FakeMessage:
+        async def edit(self, content, **kwargs):
+            sent.append(content)
+
+    class FakeChannel:
+        id = 10
+
+    matcher = KeywordMatcher([Keyword("ケツの穴がない！", reply="{name}「{text}」")], 70)
+    state = ComboState(hits=hits_in_order("穴がない", matcher.find("ケツの穴がない"), key=(1, 5)), message=FakeMessage())
+    fake_bot = SimpleNamespace(
+        _voice_combos={(10, 1): state}, _combo_lock=asyncio.Lock(), _response_channel=lambda vc: FakeChannel()
+    )
+    fake_bot._send_or_edit_combo = lambda c, s, u: botmod.KTBGRBot._send_or_edit_combo(fake_bot, c, s, u)
+    user = SimpleNamespace(id=1, mention="<@1>", display_name="テスター")
+
+    # 途中経過 (穴がない) で反応していたメッセージが、確定版の文字起こしに差し替わる
+    asyncio.run(botmod.KTBGRBot.update_voice_transcript(fake_bot, None, user, "ケツの穴がない", (1, 5)))
+    assert sent == ["テスター「ケツの穴がない」"]
+    # 別の発話の確定では変わらない
+    asyncio.run(botmod.KTBGRBot.update_voice_transcript(fake_bot, None, user, "別の発言", (1, 6)))
+    assert len(sent) == 1
+
+
 def test_no_emoji_or_markdown_in_generated_messages():
     import json
     import re

@@ -66,8 +66,14 @@ class Transcriber:
         if compute_type == "default":
             compute_type = "float16" if resolved == "cuda" else "int8"
 
-        log.info("Whisperモデル読み込み中: model=%s device=%s compute_type=%s", self.model_name, resolved, compute_type)
-        model = WhisperModel(self.model_name, device=resolved, compute_type=compute_type)
+        # faster-whisper の既定は 4 スレッド。small を CPU で動かすと 1 回 2.6 秒ほどかかり実時間に追いつかないので増やす
+        # (16 スレッドの環境で 8 にすると 1 回 1.8 秒ほど。それ以上はほぼ変わらない)
+        cpu_threads = min(8, os.cpu_count() or 4) if resolved == "cpu" else 0
+        log.info(
+            "Whisperモデル読み込み中: model=%s device=%s compute_type=%s cpu_threads=%s",
+            self.model_name, resolved, compute_type, cpu_threads or "-",
+        )
+        model = WhisperModel(self.model_name, device=resolved, compute_type=compute_type, cpu_threads=cpu_threads)
         # 初回推論は遅いのでウォームアップしておく
         list(model.transcribe(np.zeros(16000, dtype=np.float32), language=self.language, beam_size=1)[0])
 

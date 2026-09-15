@@ -25,6 +25,7 @@ from dataclasses import dataclass, field
 from difflib import SequenceMatcher
 from pathlib import Path
 
+import fugashi
 import pykakasi
 from rapidfuzz import fuzz
 from rapidfuzz.distance import Levenshtein
@@ -32,15 +33,22 @@ from rapidfuzz.distance import Levenshtein
 log = logging.getLogger(__name__)
 
 _kakasi = pykakasi.kakasi()
+_tagger = fugashi.Tagger()
 _STRIP_RE = re.compile(r"[^0-9a-zぁ-ゖ一-龯々〆]")
 _ROMAJI_STRIP_RE = re.compile(r"[^0-9a-z]")
 _REPEAT_RE = re.compile(r"(.)\1{2,}")
+# 小書き文字は大きい文字に揃える
 _SMALL_KANA = str.maketrans("ぁぃぅぇぉゃゅょゎゕゖ", "あいうえおやゆよわかけ")
+# 読みの表記では促音「っ」も消す。Whisper は「いいっすよ」「いいすよ」のように促音を落としたり足したりする。
+# 表記 (surface) には残す。消すと「えっち」が「えち」になり「声小さい (こえちいさい)」に一致するなど、短いキーワードが誤爆する
+_SMALL_KANA_NO_SOKUON = str.maketrans("ぁぃぅぇぉゃゅょゎゕゖ", "あいうえおやゆよわかけ", "っ")
 
 # これより短い表記は曖昧一致すると誤爆しやすいので完全一致 (部分文字列) のみ許可する
-_MIN_FUZZY_LEN = {"surface": 3, "reading": 3, "romaji": 5}
-# 短いローマ字は完全一致でも音の区切りをまたいで誤爆する (「おつ」otsu が「バイト疲れた」baiTOTSUkareta に一致など) ので比較しない
-_MIN_EXACT_LEN = {"surface": 0, "reading": 0, "romaji": 5}
+_MIN_FUZZY_LEN = {"surface": 3, "reading": 3, "reading_mecab": 3, "romaji": 5}
+# 完全一致に必要な長さ。
+# - 読み: 促音を消した分短くなるので 3 文字未満は比較しない (短いキーワードは表記の完全一致で拾う)
+# - ローマ字: 音の区切りをまたいで誤爆する (「おつ」otsu が「バイト疲れた」baiTOTSUkareta に一致など)
+_MIN_EXACT_LEN = {"surface": 0, "reading": 3, "reading_mecab": 3, "romaji": 5}
 
 # 聞き間違い判定 (編集距離) に必要な最低スコア。MATCH_THRESHOLD を下げても、これより低い一致は採用しない。
 # 編集距離は文字がバラバラに似ているだけでもスコアが出るので、長文 (歌詞の貼り付けなど) で関係ない一致が出やすい。
@@ -57,27 +65,48 @@ def _kata_to_hira(text: str) -> str:
     return "".join(chr(ord(c) - 0x60) if "ァ" <= c <= "ヶ" else c for c in text)
 
 
-def _clean(text: str, strip_re: re.Pattern) -> str:
-    return _REPEAT_RE.sub(r"\1\1", strip_re.sub("", text.translate(_SMALL_KANA)))
+def _clean(text: str, strip_re: re.Pattern, table: dict = _SMALL_KANA) -> str:
+    return _REPEAT_RE.sub(r"\1\1", strip_re.sub("", text.translate(table)))
 
 
 @dataclass(frozen=True)
 class Forms:
     surface: str
-    reading: str
+    reading: str  # pykakasi の読み
+    reading_mecab: str  # MeCab (UniDic) の読み
     romaji: str
 
     def items(self):
-        return (("surface", self.surface), ("reading", self.reading), ("romaji", self.romaji))
+        return (
+            ("surface", self.surface),
+            ("reading", self.reading),
+            ("reading_mecab", self.reading_mecab),
+            ("romaji", self.romaji),
+        )
+
+
+def _mecab_reading(text: str) -> str:
+    """MeCab の読み。辞書にない語は表記のまま使う。
+
+    pykakasi と MeCab は読み間違える語が違う (pykakasi: 「今日は」→こんにちは、「眠落ち」→みんおち /
+    MeCab: 「四天王」→よんてんのう、「皆」→かい) ので、両方の読みで照合して取りこぼしを減らす。
+    """
+    parts = []
+    for word in _tagger(text):
+        kana = getattr(word.feature, "kana", None)
+        parts.append(kana if kana and kana != "*" else word.surface)
+    return _kata_to_hira("".join(parts))
 
 
 def to_forms(text: str) -> Forms:
-    base = _kata_to_hira(unicodedata.normalize("NFKC", text).lower())
+    normalized = re.sub(r"\s+", " ", unicodedata.normalize("NFKC", text))
+    base = _kata_to_hira(normalized.lower())
     # pykakasi は改行の直前の語を二重に出力する (「メシア\n喘ぎ」→「めしあめしああえぎ」) ので空白にしてから変換する
-    converted = _kakasi.convert(re.sub(r"\s+", " ", base))
+    converted = _kakasi.convert(base)
     return Forms(
         surface=_clean(base, _STRIP_RE),
-        reading=_clean("".join(part["hira"] for part in converted), _STRIP_RE),
+        reading=_clean("".join(part["hira"] for part in converted), _STRIP_RE, _SMALL_KANA_NO_SOKUON),
+        reading_mecab=_clean(_mecab_reading(normalized).lower(), _STRIP_RE, _SMALL_KANA_NO_SOKUON),
         romaji=_clean("".join(part["hepburn"] for part in converted).lower(), _ROMAJI_STRIP_RE),
     )
 
@@ -236,7 +265,7 @@ class KeywordMatcher:
         スコアの高いもの (同点なら長いもの) だけを残す。ゆるい一致で同じ箇所が何重にもカウントされるのを防ぐ。
         """
         text_forms = to_forms(text)
-        seeds = {"surface": _seed_positions(text_forms.surface), "reading": _seed_positions(text_forms.reading)}
+        seeds = {v: _seed_positions(getattr(text_forms, v)) for v in ("surface", "reading", "reading_mecab")}
         matches: list[Match] = []
         for keyword in self.keywords:
             threshold = keyword.threshold if keyword.threshold is not None else self.default_threshold

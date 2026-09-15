@@ -119,8 +119,19 @@ class KTBGRBot(discord.Client):
                 await message.reply(content, mention_author=False, allowed_mentions=ALLOWED_MENTIONS)
             self.play_sound(fresh, vc)
 
-    async def react_voice(self, vc: discord.VoiceClient, user, text: str, matches: list[Match]) -> None:
-        """VC での検出。同じ人が COMBO_WINDOW_SEC 以内に続けて語録を言ったら、前のメッセージを編集してコンボを伸ばす。"""
+    async def react_voice(
+        self,
+        vc: discord.VoiceClient,
+        user,
+        text: str,
+        matches: list[Match],
+        utterance_key: tuple[int, int] | None = None,
+        context: list[str] = (),
+    ) -> None:
+        """VC での検出。同じ人が COMBO_WINDOW_SEC 以内に続けて語録を言ったら、前のメッセージを編集してコンボを伸ばす。
+
+        反応メッセージには原因になった発言の文字起こしを付記する。
+        """
         channel = self._response_channel(vc)
         key = (channel.id, user.id)
         async with self._combo_lock:
@@ -129,19 +140,37 @@ class KTBGRBot(discord.Client):
             window = self.settings.combo_window_sec
             if state is None or window <= 0 or now - state.last_time > window:
                 state = self._voice_combos[key] = ComboState()
-            state.hits += hits_in_order(text, matches)
+            state.hits += hits_in_order(text, matches, utterance_key, context)
             state.last_time = now
-
-            content = build_message(state.hits, user)
-            if content:
-                if state.message is not None:
-                    try:
-                        await state.message.edit(content=content, allowed_mentions=ALLOWED_MENTIONS)
-                    except discord.HTTPException:
-                        state.message = None  # 消されていたら送り直す
-                if state.message is None:
-                    state.message = await channel.send(content, allowed_mentions=ALLOWED_MENTIONS)
+            await self._send_or_edit_combo(channel, state, user)
         self.play_sound(matches, vc)
+
+    async def update_voice_transcript(self, vc: discord.VoiceClient, user, text: str, utterance_key: tuple[int, int]) -> None:
+        """発話が確定したら、途中経過で反応したメッセージの発言を確定版の文字起こしに差し替える。"""
+        channel = self._response_channel(vc)
+        async with self._combo_lock:
+            state = self._voice_combos.get((channel.id, user.id))
+            if state is None:
+                return
+            changed = False
+            for hit in state.hits:
+                if hit.key == utterance_key and hit.text != text:
+                    hit.text = text
+                    changed = True
+            if changed and state.message is not None:
+                await self._send_or_edit_combo(channel, state, user)
+
+    async def _send_or_edit_combo(self, channel: discord.abc.Messageable, state: ComboState, user) -> None:
+        content = build_message(state.hits, user, show_source=True)
+        if not content:
+            return
+        if state.message is not None:
+            try:
+                await state.message.edit(content=content, allowed_mentions=ALLOWED_MENTIONS)
+                return
+            except discord.HTTPException:
+                state.message = None  # 消されていたら送り直す
+        state.message = await channel.send(content, allowed_mentions=ALLOWED_MENTIONS)
 
     def play_sound(self, matches: list[Match], vc: discord.VoiceClient | None) -> None:
         sound = next((m.keyword.sound for m in matches if m.keyword.sound), None)
@@ -168,11 +197,13 @@ class KTBGRBot(discord.Client):
         if vc.is_listening():
             vc.stop_listening()
 
-        async def on_detect(user, text: str, matches: list[Match]) -> None:
-            await self.react_voice(vc, user, text, matches)
+        async def on_detect(user, text: str, matches: list[Match], utterance_key, context: list[str]) -> None:
+            await self.react_voice(vc, user, text, matches, utterance_key, context)
 
-        async def on_transcript(user, text: str) -> None:
-            await self._response_channel(vc).send(f"{user.display_name}: {text}", allowed_mentions=ALLOWED_MENTIONS)
+        async def on_transcript(user, text: str, utterance_key) -> None:
+            if self.settings.post_transcripts:
+                await self._response_channel(vc).send(f"{user.display_name}: {text}", allowed_mentions=ALLOWED_MENTIONS)
+            await self.update_voice_transcript(vc, user, text, utterance_key)
 
         sink = SpeechSink(
             settings=self.settings,
@@ -180,7 +211,7 @@ class KTBGRBot(discord.Client):
             get_matcher=lambda: self.matcher,
             loop=asyncio.get_running_loop(),
             on_detect=on_detect,
-            on_transcript=on_transcript if self.settings.post_transcripts else None,
+            on_transcript=on_transcript,
         )
         vc.listen(sink)
         return vc

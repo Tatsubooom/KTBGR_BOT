@@ -45,6 +45,8 @@ class Settings:
     silence_ms: int
     partial_interval_ms: int
     max_segment_sec: float
+    partial_window_sec: float  # 途中経過の文字起こしに使う直近の音声の長さ
+    context_sec: float  # この秒数以内の同じ人の発言とつなげて照合する
     min_speech_ms: int
     energy_threshold: float
 
@@ -97,9 +99,11 @@ def load_settings(argv: list[str] | None = None) -> Settings:
         compute_type=args.compute_type,
         language=os.getenv("WHISPER_LANGUAGE", "ja"),
         beam_size=_env_int("WHISPER_BEAM_SIZE", 1),
-        silence_ms=_env_int("SILENCE_MS", 450),
+        silence_ms=_env_int("SILENCE_MS", 350),
         partial_interval_ms=_env_int("PARTIAL_INTERVAL_MS", 1000),
         max_segment_sec=_env_float("MAX_SEGMENT_SEC", 8.0),
+        partial_window_sec=_env_float("PARTIAL_WINDOW_SEC", 3.0),
+        context_sec=_env_float("CONTEXT_SEC", 5.0),
         min_speech_ms=_env_int("MIN_SPEECH_MS", 250),
         energy_threshold=_env_float("ENERGY_THRESHOLD", 0.008),
         keywords_files=[Path(p.strip()) for p in args.keywords.split(",") if p.strip()],

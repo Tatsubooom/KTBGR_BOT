@@ -81,6 +81,20 @@ def test_no_match_on_shared_grammar_only():
         assert names(matcher, text) == [], text
 
 
+def test_mecab_reading_complements_pykakasi():
+    # pykakasi は「今日は」を「こんにちは」と読むが、MeCab の読みで一致する
+    matcher = KeywordMatcher([Keyword("きょうはいっぱいのむぞ")], 70)
+    assert names(matcher, "今日はいっぱい飲むぞ") == ["きょうはいっぱいのむぞ"]
+
+
+def test_sokuon_variation_is_ignored_in_readings():
+    matcher = KeywordMatcher([Keyword("あっ、いいっすよ")], 90)
+    assert names(matcher, "あ、いいすよ") == ["あっ、いいっすよ"]
+    # 表記では促音を残すので、短いキーワードが別の語の途中に一致しない
+    matcher = KeywordMatcher([Keyword("エッ…ﾁ", threshold=100)], 70)
+    assert names(matcher, "ちょっと声小さいかも") == []
+
+
 def test_newline_does_not_duplicate_words():
     from ktbgr.matcher import to_forms
 
