@@ -36,6 +36,20 @@ _MIN_FUZZY_LEN = {"surface": 3, "reading": 3, "romaji": 5}
 # 短いローマ字は完全一致でも音の区切りをまたいで誤爆する (「おつ」otsu が「バイト疲れた」baiTOTSUkareta に一致など) ので比較しない
 _MIN_EXACT_LEN = {"surface": 0, "reading": 0, "romaji": 5}
 
+# 曖昧一致に必要な最低スコア。MATCH_THRESHOLD を下げても、これより低い一致は採用しない。
+# ローマ字や短いキーワードは、長文 (歌詞の貼り付けなど) のどこかに似た並びが偶然見つかりやすいため。
+_ROMAJI_MIN_SCORE = 85
+_SHORT_NEEDLE_LEN = 7
+_SHORT_NEEDLE_MIN_SCORE = 85
+
+
+def _fuzzy_floor(variant: str, needle: str) -> float:
+    if variant == "romaji":
+        return _ROMAJI_MIN_SCORE
+    if len(needle) < _SHORT_NEEDLE_LEN:
+        return _SHORT_NEEDLE_MIN_SCORE
+    return 0.0
+
 
 def _kata_to_hira(text: str) -> str:
     return "".join(chr(ord(c) - 0x60) if "ァ" <= c <= "ヶ" else c for c in text)
@@ -173,9 +187,12 @@ class KeywordMatcher:
             best: Match | None = None
             for kw_forms in keyword.forms:
                 for (variant, needle), (_, haystack) in zip(kw_forms.items(), text_forms.items()):
+                    cutoff = max(threshold, _fuzzy_floor(variant, needle))
                     score, start, end = window_similarity(
-                        needle, haystack, _MIN_FUZZY_LEN[variant], threshold, _MIN_EXACT_LEN[variant]
+                        needle, haystack, _MIN_FUZZY_LEN[variant], cutoff, _MIN_EXACT_LEN[variant]
                     )
+                    if score < cutoff:
+                        continue
                     if best is None or score > best.score:
                         best = Match(keyword, score, variant, start, end)
                 if best is not None and best.score >= 100:

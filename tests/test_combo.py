@@ -15,10 +15,11 @@ def test_multiple_keywords_in_one_utterance():
 
 
 def test_overlapping_matches_are_counted_once():
-    matcher = KeywordMatcher([Keyword("してはいけない"), Keyword("まずうちさぁ、屋上…あんだけど、焼いてかない？")], 70)
-    text = "まずうちさあ屋上あるんだけど焼いていかない"
+    # 「めちゃくちゃだよ」は「あーもうめちゃくちゃだよ」と同じ箇所に一致するので1件として数える
+    matcher = KeywordMatcher([Keyword("めちゃくちゃだよ"), Keyword("あーもうめちゃくちゃだよ")], 70)
+    text = "あーもうめちゃくちゃだよ"
     assert len(matcher.find(text, allow_overlap=True)) == 2
-    assert [m.keyword.name for m in matcher.find(text)] == ["まずうちさぁ、屋上…あんだけど、焼いてかない？"]
+    assert [m.keyword.name for m in matcher.find(text)] == ["あーもうめちゃくちゃだよ"]
 
 
 def test_short_romaji_does_not_match_across_mora():
