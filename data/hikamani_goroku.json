@@ -1,0 +1,2096 @@
+{
+  "source": {
+    "name": "ピクシブ百科事典「ヒカマニ語録」",
+    "url": "https://dic.pixiv.net/a/%E3%83%92%E3%82%AB%E3%83%9E%E3%83%8B%E8%AA%9E%E9%8C%B2",
+    "fetched_at": "2026-09-15T12:23:10+00:00",
+    "generator": "scripts/fetch_hikamani_goroku.py"
+  },
+  "keywords": [
+    {
+      "name": "あーん!チャンチーン!あぁんちんち〜ん…",
+      "title": "あーん!チャンチーン!あぁんちんち〜ん…",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "【しょぼんのアクション】 4thステージ！ヒカキンの実況プレイ！HikakinGames",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: あーん!チャンチーン!あぁんちんち〜ん…（HIKAKIN）",
+      "label": "あーん!チャンチーン!あぁんちんち〜ん…（HIKAKIN）"
+    },
+    {
+      "name": "イきます",
+      "threshold": 90,
+      "title": "イきます",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "激くさオナラスプレーVS おなら消臭パンツの頂上決戦",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: イきます（HIKAKIN）",
+      "label": "イきます（HIKAKIN）"
+    },
+    {
+      "name": "ウンコの力",
+      "title": "ウンコの力",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "ウンコの力！ウコンじゃないよウンコだよ！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ウンコの力（HIKAKIN）",
+      "label": "ウンコの力（HIKAKIN）"
+    },
+    {
+      "name": "「AVA」と書いて",
+      "title": "「AVA(えーぶいえー)」と書いて",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "AVAで兄弟対決！ヒカキンｖｓセイキン【基本無料 日本No.1オンラインFPSゲーム】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 「AVA(えーぶいえー)」と書いて（HIKAKIN）",
+      "label": "「AVA(えーぶいえー)」と書いて（HIKAKIN）"
+    },
+    {
+      "name": "悔しくないの?",
+      "title": "悔しくないの?",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "【実写版ドラえもん】ドラえもんになってみた！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 悔しくないの?（HIKAKIN）",
+      "label": "悔しくないの?（HIKAKIN）"
+    },
+    {
+      "name": "ケツの穴がない！",
+      "title": "ケツの穴がない！",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "ポムポムプリンまんにケツの穴が無い件… 【肛門】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ケツの穴がない！（HIKAKIN）",
+      "label": "ケツの穴がない！（HIKAKIN）"
+    },
+    {
+      "name": "下品だなぁそうに決まってる",
+      "title": "下品だなぁそうに決まってる",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "【ホラーゲーム】青鬼を実況プレイ！サウスパーク編！ - ヒカキンゲームズ(HikakinGames)",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 下品だなぁそうに決まってる（HIKAKIN）",
+      "label": "下品だなぁそうに決まってる（HIKAKIN）"
+    },
+    {
+      "name": "腰腰腰腰腰腰",
+      "title": "腰腰腰腰腰腰",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "おしりでフラフープ回せるらしいのでやってみた！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 腰腰腰腰腰腰（HIKAKIN）",
+      "label": "腰腰腰腰腰腰（HIKAKIN）"
+    },
+    {
+      "name": "これだ！これだわ！",
+      "title": "これだ！これだわ！",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "どれが本物のヒカキン!?",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: これだ！これだわ！（HIKAKIN）",
+      "label": "これだ！これだわ！（HIKAKIN）"
+    },
+    {
+      "name": "渋谷のロフト",
+      "title": "渋谷のロフト",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 渋谷のロフト（HIKAKIN）",
+      "label": "渋谷のロフト（HIKAKIN）"
+    },
+    {
+      "name": "スーパーパンパンボム",
+      "title": "スーパーパンパンボム",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "【スプラトゥーン２】先行試射会２日目！目指せ10キル！【ヒカキンゲームズ】【Splatoon2】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: スーパーパンパンボム（HIKAKIN）",
+      "label": "スーパーパンパンボム（HIKAKIN）"
+    },
+    {
+      "name": "セックスしたい",
+      "title": "セックスしたい(設X)",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "YouTuber最強カメラ！？ GH5で色々遊んでみた！iPhone6 Plus 128GB ゴールドがやってきた！iPhone5sと比較！ゲームしたい",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: セックスしたい(設X)（HIKAKIN）",
+      "label": "セックスしたい(設X)（HIKAKIN）"
+    },
+    {
+      "name": "絶対にありません",
+      "title": "絶対にありません",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "卒業式が出来なかったみんなへ、ヒカキンより。",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 絶対にありません（HIKAKIN）",
+      "label": "絶対にありません（HIKAKIN）"
+    },
+    {
+      "name": "タタナイ",
+      "threshold": 90,
+      "title": "タタナイ",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "リアルきのこの山 作ってみた！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: タタナイ（HIKAKIN）",
+      "label": "タタナイ（HIKAKIN）"
+    },
+    {
+      "name": "ナイチンチンゲール",
+      "title": "ナイチンチンゲール(TNTN)",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "【モンスト】激獣神祭で神引きしすぎて固まった…ワルプルギス&ウリエル来い！【ヒカキンゲームズ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ナイチンチンゲール(TNTN)（HIKAKIN）",
+      "label": "ナイチンチンゲール(TNTN)（HIKAKIN）"
+    },
+    {
+      "name": "(泣く)",
+      "enabled": false,
+      "threshold": 100,
+      "title": "(泣く)",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "【マインクラフト】ヒカクラ最終回！ありがとうヒカキンくん！【ヒカキンのマイクラ実況 Part355】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: (泣く)（HIKAKIN）",
+      "label": "(泣く)（HIKAKIN）"
+    },
+    {
+      "name": "ﾅﾆｺﾚ？ﾊ？ﾁｮｯﾄﾏｯﾃﾁｮｯﾄﾏｯﾃ……",
+      "title": "ﾅﾆｺﾚ？ﾊ？ﾁｮｯﾄﾏｯﾃﾁｮｯﾄﾏｯﾃ……",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "フローズンコーラにチャレンジしてみた！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ﾅﾆｺﾚ？ﾊ？ﾁｮｯﾄﾏｯﾃﾁｮｯﾄﾏｯﾃ……（HIKAKIN）",
+      "label": "ﾅﾆｺﾚ？ﾊ？ﾁｮｯﾄﾏｯﾃﾁｮｯﾄﾏｯﾃ……（HIKAKIN）"
+    },
+    {
+      "name": "何を四天王",
+      "title": "何を四天王",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "【モンスト】今度こそいでよアリス！獣神祭金卵確定10連やってみた！【ヒカキンゲームズ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 何を四天王（HIKAKIN）",
+      "label": "何を四天王（HIKAKIN）"
+    },
+    {
+      "name": "なんかこう、お何ぃ",
+      "title": "なんかこう、お何ぃ",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "渋谷と原宿に出没してみた",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: なんかこう、お何ぃ（HIKAKIN）",
+      "label": "なんかこう、お何ぃ（HIKAKIN）"
+    },
+    {
+      "name": "なんだこの自己満動画",
+      "title": "なんだこの自己満動画",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "どれが本物のヒカキン!?",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: なんだこの自己満動画（HIKAKIN）",
+      "label": "なんだこの自己満動画（HIKAKIN）"
+    },
+    {
+      "name": "パンパンパンパン、パンパン！",
+      "title": "パンパンパンパン、パンパン！",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "【スプラトゥーン２】先行試射会２日目！目指せ10キル！【ヒカキンゲームズ】【Splatoon2】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: パンパンパンパン、パンパン！（HIKAKIN）",
+      "label": "パンパンパンパン、パンパン！（HIKAKIN）"
+    },
+    {
+      "name": "ピーチは抜ける",
+      "threshold": 90,
+      "title": "ピーチは抜ける",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "【マリオカート：】初めてキノコカップにチャレンジ！【ヒカキンゲームズ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ピーチは抜ける（HIKAKIN）",
+      "label": "ピーチは抜ける（HIKAKIN）"
+    },
+    {
+      "name": "ヒカキンさんのアナ、ゥお借りしたいんです！",
+      "title": "ヒカキンさんのアナ、ゥお借りしたいんです！",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "ゲームしたい",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ヒカキンさんのアナ、ゥお借りしたいんです！（HIKAKIN）",
+      "label": "ヒカキンさんのアナ、ゥお借りしたいんです！（HIKAKIN）"
+    },
+    {
+      "name": "HIKAKINTVでケツの穴とか言ったことあんまないけど",
+      "title": "HIKAKINTVでケツの穴とか言ったことあんまないけど",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "ポムポムプリンまんにケツの穴が無い件… 【肛門】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: HIKAKINTVでケツの穴とか言ったことあんまないけど（HIKAKIN）",
+      "label": "HIKAKINTVでケツの穴とか言ったことあんまないけど（HIKAKIN）"
+    },
+    {
+      "name": "ムラ、ムラなく",
+      "threshold": 90,
+      "title": "ムラ、ムラなく",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "【スプラトゥーン2】先行試射会で遊んでみた！【ヒカキンゲームズ】(Splatoon2)",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ムラ、ムラなく（HIKAKIN）",
+      "label": "ムラ、ムラなく（HIKAKIN）"
+    },
+    {
+      "name": "無理です",
+      "threshold": 90,
+      "title": "無理です",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "世界一臭い食べ物をさらに腐らせて食べたら大変なことになった【シュールストレミング】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 無理です（HIKAKIN）",
+      "label": "無理です（HIKAKIN）"
+    },
+    {
+      "name": "メッサムラムラ!?",
+      "title": "メッサムラムラ!?",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "【マインクラフト】神回過ぎる！メッサムラムラ！変な意味じゃないよ【ヒカキンのマイクラ実況 Part226】【ヒカクラ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: メッサムラムラ!?（HIKAKIN）",
+      "label": "メッサムラムラ!?（HIKAKIN）"
+    },
+    {
+      "name": "やぁりましょう!",
+      "title": "やぁりましょう!",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "ゲームしたい",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: やぁりましょう!（HIKAKIN）",
+      "label": "やぁりましょう!（HIKAKIN）"
+    },
+    {
+      "name": "4545",
+      "threshold": 90,
+      "title": "4545(よんごーよんごー)",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "ヒカキンTV登録者400万人突破の瞬間と日本のYouTubeのヤバさついて語る",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 4545(よんごーよんごー)（HIKAKIN）",
+      "label": "4545(よんごーよんごー)（HIKAKIN）"
+    },
+    {
+      "name": "RED",
+      "enabled": false,
+      "threshold": 100,
+      "title": "RED",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "真っ赤なiPhone Redがやって来た！【iPhone7 Plus PRODUCT RED】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: RED（HIKAKIN）",
+      "label": "RED（HIKAKIN）"
+    },
+    {
+      "name": "LET'S オ〇ニー！",
+      "threshold": 90,
+      "title": "LET'S オ〇ニー！",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "【オリンピックメダル候補？】ヒカキン VS セイキン 兄弟卓球対決！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: LET'S オ〇ニー！（HIKAKIN）",
+      "label": "LET'S オ〇ニー！（HIKAKIN）"
+    },
+    {
+      "name": "ローション!?",
+      "threshold": 90,
+      "title": "ローション!?",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "【青鬼2 たけし編】ヒカキンの実況プレイ Part1【ホラーゲーム】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ローション!?（HIKAKIN）",
+      "label": "ローション!?（HIKAKIN）"
+    },
+    {
+      "name": "わーっへっへっへっへっ！？",
+      "title": "わーっへっへっへっへっ！？",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "【モンスト】獣神祭でまさかのあいつを引きてる！【ヒカキンゲームズ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: わーっへっへっへっへっ！？（HIKAKIN）",
+      "label": "わーっへっへっへっへっ！？（HIKAKIN）"
+    },
+    {
+      "name": "キレてる→",
+      "threshold": 90,
+      "title": "キレてる→",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "フローズンコーラにチャレンジしてみた！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: キレてる→（HIKAKIN）",
+      "label": "キレてる→（HIKAKIN）"
+    },
+    {
+      "name": "←ついにおかしくなったw",
+      "aliases": [
+        "←ついおかw"
+      ],
+      "threshold": 90,
+      "title": "←ついにおかしくなったw",
+      "speaker": "HIKAKIN",
+      "stars": 5,
+      "video": "【マインクラフト】悲報…TNTジャンプのパワーを２倍にしたら悲劇は起きた…【ヒカキンのマイクラ実況 Part304】【ヒカクラ】【ご報告】TikTokに公式ヒカキンボイス機能がつきました！ひれおくんの呪い【スプラトゥーン3】【ヒカクラ2】Part146 - 放送事故… 旅路の遺跡の新しい超レアレコード\"レリック\"探しで大変なことに…【マインクラフト】【マイクラ統合版】【Minecraft】【ヒカキンゲームズ】ヒカキンの熱40度超えルーティーン【高熱密着24時】YOASOBI「アイドル」 Official Music Video HIKAKIN Ver. メイキング【フォートナイト】5年ぶりにチャプター1が帰ってきて感動！当時のリベンジ&セイキンショットの聖地巡礼【ヒカキンゲームズ】【FORTNITE OG】【制作費5264万円】結婚報告100連発のヤバイ裏側【ヒカクラ2】Part155 - 村を丸々全部桜建築で建て直してみた！【マインクラフト】【マイクラ統合版】【Minecraft】【ヒカキンゲームズ】『8番出口』の続編『8番のりば』初見プレイ！全異変回収クリアなるか!? 【今話題】ガチの限界が来てブッ壊れました",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ←ついにおかしくなったw（HIKAKIN）",
+      "label": "←ついにおかしくなったw（HIKAKIN）"
+    },
+    {
+      "name": "過去と未来の狭間",
+      "title": "過去と未来の狭間",
+      "speaker": "SEIKIN",
+      "stars": 5,
+      "video": "今 / ヒカキン & セイキン",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 過去と未来の狭間（SEIKIN）",
+      "label": "過去と未来の狭間（SEIKIN）"
+    },
+    {
+      "name": "こしこし",
+      "threshold": 90,
+      "title": "こしこし",
+      "speaker": "SEIKIN",
+      "stars": 5,
+      "video": "生きるか死ぬか。こしあんルーレット！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: こしこし（SEIKIN）",
+      "label": "こしこし（SEIKIN）"
+    },
+    {
+      "name": "SAENSキン",
+      "title": "SAENSキン",
+      "speaker": "SEIKIN",
+      "stars": 5,
+      "video": "烈車戦隊トッキュウジャー (cover)",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: SAENSキン（SEIKIN）",
+      "label": "SAENSキン（SEIKIN）"
+    },
+    {
+      "name": "大納言あずき",
+      "title": "大納言あずき",
+      "speaker": "SEIKIN",
+      "stars": 5,
+      "video": "サーティーワンアイスクリームの「ワースト3」食べてみた。",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 大納言あずき（SEIKIN）",
+      "label": "大納言あずき（SEIKIN）"
+    },
+    {
+      "name": "出たー!出た!出たぁ…",
+      "title": "出たー!出た!出たぁ…",
+      "speaker": "SEIKIN",
+      "stars": 5,
+      "video": "【モンスト】クシナダにイザナミ＆ギルガメッシュパーティーで挑む！【セイキンゲームズ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 出たー!出た!出たぁ…（SEIKIN）",
+      "label": "出たー!出た!出たぁ…（SEIKIN）"
+    },
+    {
+      "name": "人は皆膣膣膣",
+      "title": "人は皆膣膣膣",
+      "speaker": "SEIKIN",
+      "stars": 5,
+      "video": "下ネタ発言集／ヒカキン＆セイキン",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 人は皆膣膣膣（SEIKIN）",
+      "label": "人は皆膣膣膣（SEIKIN）"
+    },
+    {
+      "name": "アアア！",
+      "enabled": false,
+      "threshold": 100,
+      "title": "アアア！",
+      "speaker": "Masuo",
+      "stars": 5,
+      "video": "【マスオのマインクラフト】マグマに、、、、ダイブ！泣#124",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: アアア！（Masuo）",
+      "label": "アアア！（Masuo）"
+    },
+    {
+      "name": "え、ちょっと待って嘘でしょ嘘でしょ",
+      "title": "え、ちょっと待って嘘でしょ嘘でしょ",
+      "speaker": "Masuo",
+      "stars": 5,
+      "video": "【大事件発生】最高難易度の知恵の輪に挑戦していたら・・・",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: え、ちょっと待って嘘でしょ嘘でしょ（Masuo）",
+      "label": "え、ちょっと待って嘘でしょ嘘でしょ（Masuo）"
+    },
+    {
+      "name": "Mauso",
+      "threshold": 90,
+      "title": "Mauso",
+      "speaker": "Masuo",
+      "stars": 5,
+      "video": "一戸建てに引っ越して電気代が衝撃的でした。家で夜空を見れるようになりました。赤ちゃんてかわいいコストコで食料品を大量買いしてきたぞー！【〇〇万円】切手を売ったら驚きの金額に！妻に送る手作り生チョコ＆ガトーショコラを作るぞ！【簡単レシピ】新みそきんがキター！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: Mauso（Masuo）",
+      "label": "Mauso（Masuo）"
+    },
+    {
+      "name": "MasuoTVありますか～？",
+      "title": "MasuoTVありますか～？",
+      "speaker": "Masuo",
+      "stars": 5,
+      "video": "ついに完成MasuoTV! I've set up MasuoTV!",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: MasuoTVありますか～？（Masuo）",
+      "label": "MasuoTVありますか～？（Masuo）"
+    },
+    {
+      "name": "嬉しそう",
+      "threshold": 90,
+      "title": "嬉しそう",
+      "speaker": "コメント",
+      "stars": 5,
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 嬉しそう（コメント）",
+      "label": "嬉しそう（コメント）"
+    },
+    {
+      "name": "韓国のプロゲーマー",
+      "aliases": [
+        "韓プロ"
+      ],
+      "threshold": 90,
+      "title": "韓国のプロゲーマー",
+      "speaker": "コメント",
+      "stars": 5,
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 韓国のプロゲーマー（コメント）",
+      "label": "韓国のプロゲーマー（コメント）"
+    },
+    {
+      "name": "◯◯ますカキ。",
+      "aliases": [
+        "ますｶｷます柿ます牡蠣ます"
+      ],
+      "threshold": 90,
+      "title": "◯◯ますカキ。",
+      "speaker": "コメント",
+      "stars": 5,
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ◯◯ますカキ。（コメント）",
+      "label": "◯◯ますカキ。（コメント）"
+    },
+    {
+      "name": "許して",
+      "threshold": 90,
+      "title": "許して",
+      "speaker": "コメント",
+      "stars": 5,
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 許して（コメント）",
+      "label": "許して（コメント）"
+    },
+    {
+      "name": "笑、ゥ",
+      "threshold": 90,
+      "title": "笑、ゥ",
+      "speaker": "コメント",
+      "stars": 5,
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 笑、ゥ（コメント）",
+      "label": "笑、ゥ（コメント）"
+    },
+    {
+      "name": "アダルト",
+      "threshold": 90,
+      "title": "アダルト (アダルトコーラ)",
+      "speaker": "HIKAKIN",
+      "stars": 4,
+      "video": "恐怖のバイオコーラ！BIO COLA！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: アダルト (アダルトコーラ)（HIKAKIN）",
+      "label": "アダルト (アダルトコーラ)（HIKAKIN）"
+    },
+    {
+      "name": "いたずらの域をはるかに超えている",
+      "title": "いたずらの域をはるかに超えている",
+      "speaker": "HIKAKIN",
+      "stars": 4,
+      "video": "【悲報】ヒカキンが書類送検！？されてません！デマです！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: いたずらの域をはるかに超えている（HIKAKIN）",
+      "label": "いたずらの域をはるかに超えている（HIKAKIN）"
+    },
+    {
+      "name": "ｳﾜｰｯﾊｯﾊｯﾊｯﾊwww",
+      "title": "ｳﾜｰｯﾊｯﾊｯﾊｯﾊwww",
+      "speaker": "HIKAKIN",
+      "stars": 4,
+      "video": "セイキンに最強のサングラスをプレゼントしてみたw",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ｳﾜｰｯﾊｯﾊｯﾊｯﾊwww（HIKAKIN）",
+      "label": "ｳﾜｰｯﾊｯﾊｯﾊｯﾊwww（HIKAKIN）"
+    },
+    {
+      "name": "うわくっせ！",
+      "threshold": 90,
+      "title": "うわくっせ！",
+      "speaker": "HIKAKIN",
+      "stars": 4,
+      "video": "激くさオナラスプレーVS おなら消臭パンツの頂上決戦",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: うわくっせ！（HIKAKIN）",
+      "label": "うわくっせ！（HIKAKIN）"
+    },
+    {
+      "name": "我慢できなぁ～い!",
+      "title": "我慢できなぁ～い!",
+      "speaker": "HIKAKIN",
+      "stars": 4,
+      "video": "【ヒカクラ2】 Part13-いきなりファントムに襲われる！初エンチャントが感動レベルだった！【マインクラフト】【ヒカキンゲームズ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 我慢できなぁ～い!（HIKAKIN）",
+      "label": "我慢できなぁ～い!（HIKAKIN）"
+    },
+    {
+      "name": "気ぃ持ちいいぃ",
+      "threshold": 90,
+      "title": "気ぃ持ちいいぃ",
+      "speaker": "HIKAKIN",
+      "stars": 4,
+      "video": "【モンスト】元M4、新超絶いきなりやって勝てるのか？【帝釈天】【ヒカキンゲームズ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 気ぃ持ちいいぃ（HIKAKIN）",
+      "label": "気ぃ持ちいいぃ（HIKAKIN）"
+    },
+    {
+      "name": "ｷﾓﾁﾜﾘｨw",
+      "title": "ｷﾓﾁﾜﾘｨw",
+      "speaker": "HIKAKIN",
+      "stars": 4,
+      "video": "最新LED照明の取り付けで大暴れ！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ｷﾓﾁﾜﾘｨw（HIKAKIN）",
+      "label": "ｷﾓﾁﾜﾘｨw（HIKAKIN）"
+    },
+    {
+      "name": "肛門擦り切れました",
+      "title": "肛門擦り切れました",
+      "speaker": "HIKAKIN",
+      "stars": 4,
+      "video": "胃腸炎でウンチもらしたくないので風呂で朝まで寝ます…",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 肛門擦り切れました（HIKAKIN）",
+      "label": "肛門擦り切れました（HIKAKIN）"
+    },
+    {
+      "name": "ｺｹｹ!",
+      "threshold": 100,
+      "title": "ｺｹｹ!",
+      "speaker": "HIKAKIN",
+      "stars": 4,
+      "video": "世界一臭い食べ物をさらに腐らせて食べたら大変なことになった【シュールストレミング】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ｺｹｹ!（HIKAKIN）",
+      "label": "ｺｹｹ!（HIKAKIN）"
+    },
+    {
+      "name": "33時間7分！",
+      "title": "33時間7分！",
+      "speaker": "HIKAKIN",
+      "stars": 4,
+      "video": "YouTube中毒者になってしまいました。。。",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 33時間7分！（HIKAKIN）",
+      "label": "33時間7分！（HIKAKIN）"
+    },
+    {
+      "name": "勢姿",
+      "threshold": 90,
+      "title": "勢姿",
+      "speaker": "HIKAKIN",
+      "stars": 4,
+      "video": "猫背を治す『脊椎キョウセイベルト』してみた！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 勢姿（HIKAKIN）",
+      "label": "勢姿（HIKAKIN）"
+    },
+    {
+      "name": "全然抜けねえぞこれw",
+      "title": "全然抜けねえぞこれw",
+      "speaker": "HIKAKIN",
+      "stars": 4,
+      "video": "超巨大パナップ作ってみた！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 全然抜けねえぞこれw（HIKAKIN）",
+      "label": "全然抜けねえぞこれw（HIKAKIN）"
+    },
+    {
+      "name": "全部うっそ〜w",
+      "title": "全部うっそ〜w",
+      "speaker": "HIKAKIN",
+      "stars": 4,
+      "video": "みなさんに謝りたいことがあります。",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 全部うっそ〜w（HIKAKIN）",
+      "label": "全部うっそ〜w（HIKAKIN）"
+    },
+    {
+      "name": "想像を遥かに超えたデカさでビックリしました。やっぱりアメリカは凄い！",
+      "title": "想像を遥かに超えたデカさでビックリしました。やっぱりアメリカは凄い！",
+      "speaker": "HIKAKIN",
+      "stars": 4,
+      "video": "【世界最大！？】超巨大ヘビグミ食べてみた！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 想像を遥かに超えたデカさでビックリしました。やっぱりアメリカは凄い！（HIKAKIN）",
+      "label": "想像を遥かに超えたデカさでビックリしました。やっぱりアメリカは凄い！（HIKAKIN）"
+    },
+    {
+      "name": "ちっちゃい頃から好きなんですよね",
+      "title": "ちっちゃい頃から好きなんですよね",
+      "speaker": "HIKAKIN",
+      "stars": 4,
+      "video": "Amazonの人気耳かきNo.1はどれ？最強の耳かきを求めて！【お値段◯万円!?】ガチの金で出来た耳かき買ってみたwwwYouTuberヒカキンの人生に欠かせない10のアイテム『無くてはならない10のもの』ヒカキンの身体、壊れる",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ちっちゃい頃から好きなんですよね（HIKAKIN）",
+      "label": "ちっちゃい頃から好きなんですよね（HIKAKIN）"
+    },
+    {
+      "name": "ついに僕も、変態の仲間入りです",
+      "title": "ついに僕も、変態の仲間入りです",
+      "speaker": "HIKAKIN",
+      "stars": 4,
+      "video": "実は僕、変態なんです",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ついに僕も、変態の仲間入りです（HIKAKIN）",
+      "label": "ついに僕も、変態の仲間入りです（HIKAKIN）"
+    },
+    {
+      "name": "定期的に声が出ちゃうw",
+      "title": "定期的に声が出ちゃうw",
+      "speaker": "HIKAKIN",
+      "stars": 4,
+      "video": "【味覚終了】激辛ヌードル辛さ108倍にして食べたら頭おかしくなったwww",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 定期的に声が出ちゃうw（HIKAKIN）",
+      "label": "定期的に声が出ちゃうw（HIKAKIN）"
+    },
+    {
+      "name": "デカすぎる…",
+      "threshold": 90,
+      "title": "デカすぎる…",
+      "speaker": "HIKAKIN",
+      "stars": 4,
+      "video": "デカすぎる…",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: デカすぎる…（HIKAKIN）",
+      "label": "デカすぎる…（HIKAKIN）"
+    },
+    {
+      "name": "10が、すごく欲しかったんですよね",
+      "title": "10が(てんが)、すごく欲しかったんですよね",
+      "speaker": "HIKAKIN",
+      "stars": 4,
+      "video": "【悲報】iPhone X、水没 & 全力の変顔でFace ID(顔認証)やったらまさかの結果に！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 10が(てんが)、すごく欲しかったんですよね（HIKAKIN）",
+      "label": "10が(てんが)、すごく欲しかったんですよね（HIKAKIN）"
+    },
+    {
+      "name": "でも出来ない",
+      "threshold": 90,
+      "title": "でも出来ない",
+      "speaker": "HIKAKIN",
+      "stars": 4,
+      "video": "結婚出来ないので花嫁ガチャ引きまくって1番結婚したい子を決めるw【逆転オセロニア】 【ブライダルガチャ'18】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: でも出来ない（HIKAKIN）",
+      "label": "でも出来ない（HIKAKIN）"
+    },
+    {
+      "name": "なんかエロいなちょっと…",
+      "title": "なんかエロいなちょっと…",
+      "speaker": "HIKAKIN",
+      "stars": 4,
+      "video": "最新LED照明の取り付けで大暴れ！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: なんかエロいなちょっと…（HIKAKIN）",
+      "label": "なんかエロいなちょっと…（HIKAKIN）"
+    },
+    {
+      "name": "ヌプヌプしてる",
+      "title": "ヌプヌプしてる",
+      "speaker": "HIKAKIN",
+      "stars": 4,
+      "video": "デカすぎる…",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ヌプヌプしてる（HIKAKIN）",
+      "label": "ヌプヌプしてる（HIKAKIN）"
+    },
+    {
+      "name": "ねっとぉ〜りしてる",
+      "title": "ねっとぉ〜りしてる(NTR)",
+      "speaker": "HIKAKIN",
+      "stars": 4,
+      "video": "皮ごとバナナ食べてみたw",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ねっとぉ〜りしてる(NTR)（HIKAKIN）",
+      "label": "ねっとぉ〜りしてる(NTR)（HIKAKIN）"
+    },
+    {
+      "name": "ぶった切りまーす",
+      "title": "ぶった切りまーす",
+      "speaker": "HIKAKIN",
+      "stars": 4,
+      "video": "スーパーカップスイーツを包丁で真っ二つにして食べるw",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ぶった切りまーす（HIKAKIN）",
+      "label": "ぶった切りまーす（HIKAKIN）"
+    },
+    {
+      "name": "周りをこう、ぉ何ー?",
+      "title": "周りをこう、ぉ何ー?",
+      "speaker": "HIKAKIN",
+      "stars": 4,
+      "video": "【マインクラフト】やり残しやるよ！【ヒカキンのマイクラ実況 Part194】【ヒカクラ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 周りをこう、ぉ何ー?（HIKAKIN）",
+      "label": "周りをこう、ぉ何ー?（HIKAKIN）"
+    },
+    {
+      "name": "萌え王",
+      "threshold": 90,
+      "title": "萌え王",
+      "speaker": "HIKAKIN",
+      "stars": 4,
+      "video": "世界一臭い食べ物をさらに腐らせて食べたら大変なことになった【シュールストレミング】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 萌え王（HIKAKIN）",
+      "label": "萌え王（HIKAKIN）"
+    },
+    {
+      "name": "許せんなぁ...許せんなぁ!!",
+      "title": "許せんなぁ...許せんなぁ!!",
+      "speaker": "HIKAKIN",
+      "stars": 4,
+      "video": "ヒカキンが消した激怒動画",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 許せんなぁ...許せんなぁ!!（HIKAKIN）",
+      "label": "許せんなぁ...許せんなぁ!!（HIKAKIN）"
+    },
+    {
+      "name": "layP",
+      "threshold": 90,
+      "title": "layP",
+      "speaker": "HIKAKIN",
+      "stars": 4,
+      "video": "PSVRでサメに襲われて心臓止まりかけたwww【プレイステーション VR】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: layP（HIKAKIN）",
+      "label": "layP（HIKAKIN）"
+    },
+    {
+      "name": "あっ、おい",
+      "threshold": 90,
+      "title": "あっ、おい",
+      "speaker": "SEIKIN",
+      "stars": 4,
+      "video": "逆さアポロが本当に存在するのか確かめるべく、販売元の明治に電話してみたww",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: あっ、おい（SEIKIN）",
+      "label": "あっ、おい（SEIKIN）"
+    },
+    {
+      "name": "ｲｸｰｰｰｰｰ!There!",
+      "title": "ｲｸｰｰｰｰｰ!There!",
+      "speaker": "SEIKIN",
+      "stars": 4,
+      "video": "ウルトラシュワッチサイダー飲んでみた！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ｲｸｰｰｰｰｰ!There!（SEIKIN）",
+      "label": "ｲｸｰｰｰｰｰ!There!（SEIKIN）"
+    },
+    {
+      "name": "いやおかしいだろ、おかしいだろwなんなんだこれはw",
+      "title": "いやおかしいだろ、おかしいだろwなんなんだこれはw",
+      "speaker": "SEIKIN",
+      "stars": 4,
+      "video": "【公式】毒を盛られたことに気づいたセイキン",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: いやおかしいだろ、おかしいだろwなんなんだこれはw（SEIKIN）",
+      "label": "いやおかしいだろ、おかしいだろwなんなんだこれはw（SEIKIN）"
+    },
+    {
+      "name": "うるさいわボケー",
+      "title": "うるさいわボケー",
+      "speaker": "SEIKIN",
+      "stars": 4,
+      "video": "ぐでたまにYouTubeテーマソングとJust Do It Now歌わせてみた",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: うるさいわボケー（SEIKIN）",
+      "label": "うるさいわボケー（SEIKIN）"
+    },
+    {
+      "name": "出ない！出ないんですねぇ これが出ないんだなぁ～……出ないかー！",
+      "title": "出ない！出ないんですねぇ これが出ないんだなぁ～……出ないかー！",
+      "speaker": "SEIKIN",
+      "stars": 4,
+      "video": "【モンスト】ヤマトタケルに攻めの勝負！【セイキンゲームズ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 出ない！出ないんですねぇ これが出ないんだなぁ～……出ないかー！（SEIKIN）",
+      "label": "出ない！出ないんですねぇ これが出ないんだなぁ～……出ないかー！（SEIKIN）"
+    },
+    {
+      "name": "どゆこと？",
+      "threshold": 90,
+      "title": "どゆこと？",
+      "speaker": "SEIKIN",
+      "stars": 4,
+      "video": "兄弟でローソンで爆買いしてみたw 店内YouTuberまみれ!?",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: どゆこと？（SEIKIN）",
+      "label": "どゆこと？（SEIKIN）"
+    },
+    {
+      "name": "マインクラフトのデータね、消えちゃったんだよね！？",
+      "title": "マインクラフトのデータね、消えちゃったんだよね！？",
+      "speaker": "Masuo",
+      "stars": 4,
+      "video": "【超絶悲報】マイクラのデータが壊れた、、、マスオも壊れた。",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: マインクラフトのデータね、消えちゃったんだよね！？（Masuo）",
+      "label": "マインクラフトのデータね、消えちゃったんだよね！？（Masuo）"
+    },
+    {
+      "name": "マスオ死亡",
+      "threshold": 90,
+      "title": "マスオ死亡",
+      "speaker": "Masuo",
+      "stars": 4,
+      "video": "【マスオのマインクラフト】ピラミッドを探検してみよう！part36",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: マスオ死亡（Masuo）",
+      "label": "マスオ死亡（Masuo）"
+    },
+    {
+      "name": "アナルラッシュ",
+      "title": "アナルラッシュ",
+      "speaker": "コメント",
+      "stars": 4,
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: アナルラッシュ（コメント）",
+      "label": "アナルラッシュ（コメント）"
+    },
+    {
+      "name": "今って言え",
+      "aliases": [
+        "今って言え今って"
+      ],
+      "threshold": 90,
+      "title": "今って言え",
+      "speaker": "コメント",
+      "stars": 4,
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 今って言え（コメント）",
+      "label": "今って言え（コメント）"
+    },
+    {
+      "name": "ゲッ、〇〇キンかよ",
+      "aliases": [
+        "ゲックス",
+        "GEX"
+      ],
+      "threshold": 100,
+      "title": "ゲッ、〇〇キンかよ",
+      "speaker": "コメント",
+      "stars": 4,
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ゲッ、〇〇キンかよ（コメント）",
+      "label": "ゲッ、〇〇キンかよ（コメント）"
+    },
+    {
+      "name": "コロッケ",
+      "threshold": 90,
+      "title": "コロッケ",
+      "speaker": "コメント",
+      "stars": 4,
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: コロッケ（コメント）",
+      "label": "コロッケ（コメント）"
+    },
+    {
+      "name": "ぶん殴るぞ泣き虫",
+      "aliases": [
+        "殴虫"
+      ],
+      "threshold": 90,
+      "title": "ぶん殴るぞ泣き虫",
+      "speaker": "コメント",
+      "stars": 4,
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ぶん殴るぞ泣き虫（コメント）",
+      "label": "ぶん殴るぞ泣き虫（コメント）"
+    },
+    {
+      "name": "阿野、ェ",
+      "threshold": 100,
+      "title": "阿野、ェ",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "【推薦募集】 HIKAKINさんがM4を卒業。今まで本当にありがとうございました。そして、、、次なるM4メンバーは一体誰になるのか？【モンスト公式】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 阿野、ェ（HIKAKIN）",
+      "label": "阿野、ェ（HIKAKIN）"
+    },
+    {
+      "name": "あのやろぉw",
+      "threshold": 90,
+      "title": "あのやろぉw(自主規制)",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "【マインクラフト】ジョニーをTNTで爆破して殺ります！復讐や！【ヒカキンのマイクラ実況 Part353】【ヒカクラ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: あのやろぉw(自主規制)（HIKAKIN）",
+      "label": "あのやろぉw(自主規制)（HIKAKIN）"
+    },
+    {
+      "name": "痛い…痛い…痛い！",
+      "title": "痛い…痛い…痛い！",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "絶対につかめない謎の物体 vs 絶対に滑らないスプレー！！！【ローション vs滑り止めスプレーもあるよw】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 痛い…痛い…痛い！（HIKAKIN）",
+      "label": "痛い…痛い…痛い！（HIKAKIN）"
+    },
+    {
+      "name": "We are chimpo~",
+      "title": "We are chimpo~",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "【HIKAKIN】YouTube王を捕まえろ！HIKAKIN鬼ごっこ！【サプライズ！？】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: We are chimpo~（HIKAKIN）",
+      "label": "We are chimpo~（HIKAKIN）"
+    },
+    {
+      "name": "エッ…ﾁ",
+      "threshold": 100,
+      "title": "エッ…ﾁ",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "鋼の錬金術師コラボガチャでかつてない神引きwww【逆転オセロニア】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: エッ…ﾁ（HIKAKIN）",
+      "label": "エッ…ﾁ（HIKAKIN）"
+    },
+    {
+      "name": "終わった…終わったぁ…！",
+      "title": "終わった…終わったぁ…！(泣く)",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "ヒカキンが消した激怒動画",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 終わった…終わったぁ…！(泣く)（HIKAKIN）",
+      "label": "終わった…終わったぁ…！(泣く)（HIKAKIN）"
+    },
+    {
+      "name": "汚い言葉遣い",
+      "title": "汚い言葉遣い",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "【ヒカキン矛盾発言】 汚い言葉遣いは子どもがマネするからダメ(Hikakin_Mania)",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 汚い言葉遣い（HIKAKIN）",
+      "label": "汚い言葉遣い（HIKAKIN）"
+    },
+    {
+      "name": "気持ちわりーw",
+      "threshold": 90,
+      "title": "気持ちわりーw",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "無理矢理笑顔にするカメラアプリがおもしろすぎたwww",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 気持ちわりーw（HIKAKIN）",
+      "label": "気持ちわりーw（HIKAKIN）"
+    },
+    {
+      "name": "この星を消す",
+      "title": "この星を消す",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "【この星を消す…ッ！】にヒカキン登場！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: この星を消す（HIKAKIN）",
+      "label": "この星を消す（HIKAKIN）"
+    },
+    {
+      "name": "この世から消え失せろよ！",
+      "title": "この世から消え失せろよ！",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "【拡散希望】マスク詐欺が許せない。その手口と被害防止について【家族を守ろう】【注意喚起】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: この世から消え失せろよ！（HIKAKIN）",
+      "label": "この世から消え失せろよ！（HIKAKIN）"
+    },
+    {
+      "name": "5,696,600",
+      "title": "5,696,600",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "700万円のパソコン Mac Proフルスペック購入の瞬間【Apple信者ヒカキン】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 5,696,600（HIKAKIN）",
+      "label": "5,696,600（HIKAKIN）"
+    },
+    {
+      "name": "これを食べないと地獄に落ちちゃうよ",
+      "title": "これを食べないと地獄に落ちちゃうよ",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "世界一臭い食べ物をさらに腐らせて食べたら大変なことになった【シュールストレミング】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: これを食べないと地獄に落ちちゃうよ（HIKAKIN）",
+      "label": "これを食べないと地獄に落ちちゃうよ（HIKAKIN）"
+    },
+    {
+      "name": "四国初上陸！",
+      "title": "四国初上陸！",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "【旅動画】 一泊16万の超高級ホテル！ヒカキン&マスオ愛媛松山の旅！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 四国初上陸！（HIKAKIN）",
+      "label": "四国初上陸！（HIKAKIN）"
+    },
+    {
+      "name": "社製",
+      "threshold": 90,
+      "title": "社製(しゃっせー)",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "【大雨】YouTuber 4×100mリレーで真剣勝負！【土砂降り】赤い服のセクシーお姉さんにストーカーされるホラーゲーム - 赤い女 - Akai Onna 【ヒカキンゲームズ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 社製(しゃっせー)（HIKAKIN）",
+      "label": "社製(しゃっせー)（HIKAKIN）"
+    },
+    {
+      "name": "生死をかけた",
+      "title": "生死をかけた",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "【動画】【ニュース】スマートフォン向けアプリ『空と大地のクロスノア』タイトル発表会にHIKAKINが登場！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 生死をかけた（HIKAKIN）",
+      "label": "生死をかけた（HIKAKIN）"
+    },
+    {
+      "name": "その通り！w",
+      "threshold": 90,
+      "title": "その通り！w",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "街でYouTuberのイメージ聞いてみた！ヒカキンTVインタビュー【原宿編】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: その通り！w（HIKAKIN）",
+      "label": "その通り！w（HIKAKIN）"
+    },
+    {
+      "name": "タイムスリップしたい、タイムスリップしたいよ〜！",
+      "title": "タイムスリップしたい、タイムスリップしたいよ〜！",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "ヒカキンが消した激怒動画",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: タイムスリップしたい、タイムスリップしたいよ〜！（HIKAKIN）",
+      "label": "タイムスリップしたい、タイムスリップしたいよ〜！（HIKAKIN）"
+    },
+    {
+      "name": "堕天の王なり！",
+      "title": "堕天の王なり！(おおなにぃ！)",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "【モンスト】獣神化ルシファー使ったらぶっ壊れてたwww【ヒカキンゲームズ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 堕天の王なり！(おおなにぃ！)（HIKAKIN）",
+      "label": "堕天の王なり！(おおなにぃ！)（HIKAKIN）"
+    },
+    {
+      "name": "超出てる腸出てる！",
+      "title": "超出てる腸出てる！",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "【マインクラフト】村人増殖成功でニート増えまくり!?【ヒカキンのマイクラ実況 Part340】【ヒカクラ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 超出てる腸出てる！（HIKAKIN）",
+      "label": "超出てる腸出てる！（HIKAKIN）"
+    },
+    {
+      "name": "というのは嘘です。",
+      "title": "というのは嘘です。",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "【暴露】実はヒカキンには2人の娘がいます。。。",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: というのは嘘です。（HIKAKIN）",
+      "label": "というのは嘘です。（HIKAKIN）"
+    },
+    {
+      "name": "同点！？",
+      "threshold": 90,
+      "title": "同点！？(童貞)",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "【マリオカート8】100ccスターカップに挑戦！【ヒカキンゲームズ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 同点！？(童貞)（HIKAKIN）",
+      "label": "同点！？(童貞)（HIKAKIN）"
+    },
+    {
+      "name": "ドキドキしてきた〜",
+      "title": "ドキドキしてきた〜",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "ヒカキンが3年ぶりに東京で車運転したらヤバかったwww【ヒカキン&セイキン】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ドキドキしてきた〜（HIKAKIN）",
+      "label": "ドキドキしてきた〜（HIKAKIN）"
+    },
+    {
+      "name": "7,095,110",
+      "title": "7,095,110",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "700万円のパソコン Mac Proフルスペック購入の瞬間【Apple信者ヒカキン】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 7,095,110（HIKAKIN）",
+      "label": "7,095,110（HIKAKIN）"
+    },
+    {
+      "name": "何語やねん！",
+      "threshold": 90,
+      "title": "何語やねん！",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "恐怖のバイオコーラ！BIO COLA！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 何語やねん！（HIKAKIN）",
+      "label": "何語やねん！（HIKAKIN）"
+    },
+    {
+      "name": "なんかマヨネーズ飛び散っちゃったみたいになってます",
+      "title": "なんかマヨネーズ飛び散っちゃったみたいになってます",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "トルコ風アイス限界までのばしてみた！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: なんかマヨネーズ飛び散っちゃったみたいになってます（HIKAKIN）",
+      "label": "なんかマヨネーズ飛び散っちゃったみたいになってます（HIKAKIN）"
+    },
+    {
+      "name": "果てしなく続く空その先にある物",
+      "title": "果てしなく続く空その先にある物",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "ヒカキン & セイキン - 夢",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 果てしなく続く空その先にある物（HIKAKIN）",
+      "label": "果てしなく続く空その先にある物（HIKAKIN）"
+    },
+    {
+      "name": "ヒカキンマニア",
+      "title": "ヒカキンマニア",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "【総額500万超え!?】ルイ・ヴィトン × ヴァージル・アブロー第１弾アイテム購入品紹介！【Louis Vuitton × Virgil Abloh】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ヒカキンマニア（HIKAKIN）",
+      "label": "ヒカキンマニア（HIKAKIN）"
+    },
+    {
+      "name": "ヒカマニヒカマニが凄いな",
+      "title": "ヒカマニヒカマニが凄いな",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "フォートナイトシーズン７初見で最速プレイ！【ヒカキンゲームズ】【FORTNITE】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ヒカマニヒカマニが凄いな（HIKAKIN）",
+      "label": "ヒカマニヒカマニが凄いな（HIKAKIN）"
+    },
+    {
+      "name": "ひまわりは抜ける",
+      "title": "ひまわりは抜ける",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "【マインクラフト】ヒカクラ村を一気に修理！色んなとこなおすぜ！【ヒカキンのマイクラ実況 Part267】【ヒカクラ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ひまわりは抜ける（HIKAKIN）",
+      "label": "ひまわりは抜ける（HIKAKIN）"
+    },
+    {
+      "name": "ﾋﾟﾝﾋﾟｰﾝ",
+      "threshold": 90,
+      "title": "ﾋﾟﾝﾋﾟｰﾝ",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "【マインクラフト】石がまるで土!? ビーコンのMAXパワーがスゴすぎた！家の近くに新スライムトラップを作る！【ヒカキンのマイクラ実況 Part205】【ヒカクラ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ﾋﾟﾝﾋﾟｰﾝ（HIKAKIN）",
+      "label": "ﾋﾟﾝﾋﾟｰﾝ（HIKAKIN）"
+    },
+    {
+      "name": "ファイブティーン",
+      "title": "ファイブティーン",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "風呂で氷漬けになってみた！ロッテ爽キャンペーン！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ファイブティーン（HIKAKIN）",
+      "label": "ファイブティーン（HIKAKIN）"
+    },
+    {
+      "name": "ふざけんなぁあああ！！",
+      "title": "ふざけんなぁあああ！！",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "【青鬼オンライン】大型ヒカキンコラボキター！！ゴールデンヒカキンモアイゲットするまで終われませんwww【ヒカキンゲームズ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ふざけんなぁあああ！！（HIKAKIN）",
+      "label": "ふざけんなぁあああ！！（HIKAKIN）"
+    },
+    {
+      "name": "ぶっ潰す！",
+      "threshold": 90,
+      "title": "ぶっ潰す！",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "【マインクラフト】ジョニーをTNTで爆破して殺ります！復讐や！【ヒカキンのマイクラ実況 Part353】【ヒカクラ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ぶっ潰す！（HIKAKIN）",
+      "label": "ぶっ潰す！（HIKAKIN）"
+    },
+    {
+      "name": "ﾍ゜ーーーーーﾂ!",
+      "enabled": false,
+      "threshold": 100,
+      "title": "ﾍ゜ーーーーーﾂ!",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ﾍ゜ーーーーーﾂ!（HIKAKIN）",
+      "label": "ﾍ゜ーーーーーﾂ!（HIKAKIN）"
+    },
+    {
+      "name": "ボッキー",
+      "threshold": 100,
+      "title": "ボッキー",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "ポッキーショックで超ビビった！Pocky Shock！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ボッキー（HIKAKIN）",
+      "label": "ボッキー（HIKAKIN）"
+    },
+    {
+      "name": "枕仕事",
+      "threshold": 90,
+      "title": "枕仕事",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "羽毛布団がやってきた！無印良品でゲット！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 枕仕事（HIKAKIN）",
+      "label": "枕仕事（HIKAKIN）"
+    },
+    {
+      "name": "ママご飯ママご飯",
+      "title": "ママご飯ママご飯",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "赤ちゃん用の離乳食食べてみた！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ママご飯ママご飯（HIKAKIN）",
+      "label": "ママご飯ママご飯（HIKAKIN）"
+    },
+    {
+      "name": "ムラｯ､ムラサキマン…",
+      "title": "ムラｯ､ムラサキマン…",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "ポテトマンリベンジでついに全クリ！？Potatoman Seeks The Troof！＃2",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ムラｯ､ムラサキマン…（HIKAKIN）",
+      "label": "ムラｯ､ムラサキマン…（HIKAKIN）"
+    },
+    {
+      "name": "無理でした",
+      "threshold": 90,
+      "title": "無理でした",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "風呂で氷漬けになってみた！ロッテ爽キャンペーン！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 無理でした（HIKAKIN）",
+      "label": "無理でした（HIKAKIN）"
+    },
+    {
+      "name": "目障りだクソ野郎",
+      "title": "目障りだクソ野郎",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "タダでiPhone7プレゼントしません！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 目障りだクソ野郎（HIKAKIN）",
+      "label": "目障りだクソ野郎（HIKAKIN）"
+    },
+    {
+      "name": "ロゼッッタァァ！！",
+      "title": "ロゼッッタァァ！！",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "【マリオカート8】100ccスターカップに挑戦！【ヒカキンゲームズ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ロゼッッタァァ！！（HIKAKIN）",
+      "label": "ロゼッッタァァ！！（HIKAKIN）"
+    },
+    {
+      "name": "をっぱ〜い",
+      "threshold": 90,
+      "title": "をっぱ〜い",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "【マリオメーカー２】Lemon & パプリカ &マリーゴールド & 前前前世を熱唱w【米津玄師】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: をっぱ〜い（HIKAKIN）",
+      "label": "をっぱ〜い（HIKAKIN）"
+    },
+    {
+      "name": "アナ、ゥ",
+      "threshold": 100,
+      "title": "アナ、ゥ",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "恐怖のバイオコーラ！BIO COLA！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: アナ、ゥ（HIKAKIN）",
+      "label": "アナ、ゥ（HIKAKIN）"
+    },
+    {
+      "name": "あなる",
+      "threshold": 100,
+      "title": "あなる",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "【マインクラフト】畑を廃止して敷地を大幅に広げるぜ！【ヒカキンのマイクラ実況 Part212】【ヒカクラ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: あなる（HIKAKIN）",
+      "label": "あなる（HIKAKIN）"
+    },
+    {
+      "name": "ああなる…！",
+      "threshold": 90,
+      "title": "ああなる…！",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "【悲報】iPhone XR 全カラー水没！【XR･XS比較レビュー】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ああなる…！（HIKAKIN）",
+      "label": "ああなる…！（HIKAKIN）"
+    },
+    {
+      "name": "あ、なるなる",
+      "threshold": 90,
+      "title": "あ、なるなる",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "【マインクラフト】ファミマの入店音を音符ブロックで再現してみた！【ヒカキンのマイクラ実況 Part274】【ヒカクラ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: あ、なるなる（HIKAKIN）",
+      "label": "あ、なるなる（HIKAKIN）"
+    },
+    {
+      "name": "あ、なるなるなるぅ",
+      "title": "あ、なるなるなるぅ",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "上に同じ",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: あ、なるなるなるぅ（HIKAKIN）",
+      "label": "あ、なるなるなるぅ（HIKAKIN）"
+    },
+    {
+      "name": "あなるぅ",
+      "threshold": 90,
+      "title": "あなるぅ",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "はねろ！コイキングやってみた！ナゾおじさんが怪しすぎるw【ヒカキンゲームズ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: あなるぅ（HIKAKIN）",
+      "label": "あなるぅ（HIKAKIN）"
+    },
+    {
+      "name": "アッ、なる",
+      "threshold": 90,
+      "title": "アッ、なる",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "うまい棒スティックパーティーでうまい棒スライスしてみた!",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: アッ、なる（HIKAKIN）",
+      "label": "アッ、なる（HIKAKIN）"
+    },
+    {
+      "name": "あぁぁぁなるぉ",
+      "threshold": 90,
+      "title": "あぁぁぁなるぉ",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "ゆるゲゲにヒカキンぬりかべ登場www【ゆる～いゲゲゲの鬼太郎 妖怪ドタバタ大戦争】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: あぁぁぁなるぉ（HIKAKIN）",
+      "label": "あぁぁぁなるぉ（HIKAKIN）"
+    },
+    {
+      "name": "かなり極限な状態でリアクション不可→",
+      "aliases": [
+        "かなリア→"
+      ],
+      "threshold": 90,
+      "title": "かなり極限な状態でリアクション不可→",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "【閲覧注意】ハブ粉(内臓入り)飲んでみたら危なかった【ゲテモノTV】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: かなり極限な状態でリアクション不可→（HIKAKIN）",
+      "label": "かなり極限な状態でリアクション不可→（HIKAKIN）"
+    },
+    {
+      "name": "←実はすぐ泣く",
+      "title": "←実はすぐ泣く",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "モンスターズ・ユニバーシティ見て号泣！MovieNEXが凄い！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ←実はすぐ泣く（HIKAKIN）",
+      "label": "←実はすぐ泣く（HIKAKIN）"
+    },
+    {
+      "name": "むなしさを感じてる→",
+      "aliases": [
+        "むな感→"
+      ],
+      "threshold": 90,
+      "title": "むなしさを感じてる→",
+      "speaker": "HIKAKIN",
+      "stars": 3,
+      "video": "日本一豪快なクラッカー発射してみた！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: むなしさを感じてる→（HIKAKIN）",
+      "label": "むなしさを感じてる→（HIKAKIN）"
+    },
+    {
+      "name": "いきます！画鋲投入～！",
+      "title": "いきます！画鋲投入～！",
+      "speaker": "SEIKIN",
+      "stars": 3,
+      "video": "スライムに画鋲1000個混ぜたら世界一危険なスライムできた・・・.mp4",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: いきます！画鋲投入～！（SEIKIN）",
+      "label": "いきます！画鋲投入～！（SEIKIN）"
+    },
+    {
+      "name": "ジョセフ、ジョセフ～！",
+      "title": "ジョセフ、ジョセフ～！",
+      "speaker": "SEIKIN",
+      "stars": 3,
+      "video": "ゴミが1/3に減るゴミ箱！？マジかよ。",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ジョセフ、ジョセフ～！（SEIKIN）",
+      "label": "ジョセフ、ジョセフ～！（SEIKIN）"
+    },
+    {
+      "name": "だ〜か〜ら僕は、尻出す尻出す尻出す尻出す",
+      "title": "だ〜か〜ら僕は、尻出す尻出す尻出す尻出す",
+      "speaker": "SEIKIN",
+      "stars": 3,
+      "video": "下ネタ発言集／ヒカキン＆セイキン",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: だ〜か〜ら僕は、尻出す尻出す尻出す尻出す（SEIKIN）",
+      "label": "だ〜か〜ら僕は、尻出す尻出す尻出す尻出す（SEIKIN）"
+    },
+    {
+      "name": "出た！やっちまった！",
+      "title": "出た！やっちまった！",
+      "speaker": "SEIKIN",
+      "stars": 3,
+      "video": "【モンスト】本気でイザナミに挑む！ついに勝利か！？【セイキンゲームズ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 出た！やっちまった！（SEIKIN）",
+      "label": "出た！やっちまった！（SEIKIN）"
+    },
+    {
+      "name": "やりましょー！",
+      "threshold": 90,
+      "title": "やりましょー！",
+      "speaker": "SEIKIN",
+      "stars": 3,
+      "video": "世界最小？のごみ箱たち",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: やりましょー！（SEIKIN）",
+      "label": "やりましょー！（SEIKIN）"
+    },
+    {
+      "name": "40代から50代の女性をターゲットにした非常に、もうひじょ〜に大人向けな",
+      "title": "40代から50代の女性をターゲットにした非常に、もうひじょ〜に大人向けな",
+      "speaker": "SEIKIN",
+      "stars": 3,
+      "video": "ラミー＆バッカス（洋酒入りチョコレート）Rummy&Bacchus",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 40代から50代の女性をターゲットにした非常に、もうひじょ〜に大人向けな（SEIKIN）",
+      "label": "40代から50代の女性をターゲットにした非常に、もうひじょ〜に大人向けな（SEIKIN）"
+    },
+    {
+      "name": "yeah～4〜やぁ～皆さんどうですか～ハードゲイですよ～",
+      "title": "yeah～4〜やぁ～皆さんどうですか～ハードゲイですよ～",
+      "speaker": "Masuo",
+      "stars": 3,
+      "video": "今日発売の肉の城壁Jr.を生放送で食べる！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: yeah～4〜やぁ～皆さんどうですか～ハードゲイですよ～（Masuo）",
+      "label": "yeah～4〜やぁ～皆さんどうですか～ハードゲイですよ～（Masuo）"
+    },
+    {
+      "name": "ゲイマスオ",
+      "threshold": 90,
+      "title": "ゲイマスオ",
+      "speaker": "Masuo",
+      "stars": 3,
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ゲイマスオ（Masuo）",
+      "label": "ゲイマスオ（Masuo）"
+    },
+    {
+      "name": "ハチハチブンブン",
+      "title": "ハチハチブンブン",
+      "speaker": "Masuo",
+      "stars": 3,
+      "video": "MINECON Live 2019",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ハチハチブンブン（Masuo）",
+      "label": "ハチハチブンブン（Masuo）"
+    },
+    {
+      "name": "ローション風呂にぃ～入りたいと思います～！",
+      "title": "ローション風呂にぃ～入りたいと思います～！",
+      "speaker": "Masuo",
+      "stars": 3,
+      "video": "家でローション風呂に入ってみた！Lotion bath!",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ローション風呂にぃ～入りたいと思います～！（Masuo）",
+      "label": "ローション風呂にぃ～入りたいと思います～！（Masuo）"
+    },
+    {
+      "name": "ｱｼﾞｬｽﾄﾞｩｰｲｯ",
+      "title": "ｱｼﾞｬｽﾄﾞｩｰｲｯ",
+      "stars": 3,
+      "video": "生きるか死ぬか。こしあんルーレット！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ｱｼﾞｬｽﾄﾞｩｰｲｯ",
+      "label": "ｱｼﾞｬｽﾄﾞｩｰｲｯ"
+    },
+    {
+      "name": "どうしたんだ、笑顔を思い出せ",
+      "title": "どうしたんだ、笑顔を思い出せ",
+      "stars": 3,
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: どうしたんだ、笑顔を思い出せ",
+      "label": "どうしたんだ、笑顔を思い出せ"
+    },
+    {
+      "name": "バチッ！",
+      "threshold": 100,
+      "title": "バチッ！",
+      "stars": 3,
+      "video": "【闇ガチャ】闇鍋カプセル３回引いたので開封してみた！助けて。兄ちゃん。。。【妖怪ウォッチ４】日本最速実況で大爆笑www【ヒカキン&セイキン】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: バチッ！",
+      "label": "バチッ！"
+    },
+    {
+      "name": "ﾋﾟﾛｰﾝ",
+      "threshold": 100,
+      "title": "ﾋﾟﾛｰﾝ",
+      "stars": 3,
+      "video": "【青鬼2 たけし編】ヒカキンの実況プレイ Part1【ホラーゲーム】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ﾋﾟﾛｰﾝ",
+      "label": "ﾋﾟﾛｰﾝ"
+    },
+    {
+      "name": "ﾌﾞｰﾝ…",
+      "enabled": false,
+      "threshold": 100,
+      "title": "ﾌﾞｰﾝ…",
+      "stars": 3,
+      "video": "ゲームしたい",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ﾌﾞｰﾝ…",
+      "label": "ﾌﾞｰﾝ…"
+    },
+    {
+      "name": "ﾐｬｰｵ",
+      "threshold": 100,
+      "title": "ﾐｬｰｵ",
+      "stars": 3,
+      "video": "【マインクラフト】ヒカクラ最終回！ありがとうヒカキンくん！【ヒカキンのマイクラ実況 Part355】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ﾐｬｰｵ",
+      "label": "ﾐｬｰｵ"
+    },
+    {
+      "name": "ああ亀頭か",
+      "threshold": 90,
+      "title": "ああ亀頭か",
+      "speaker": "コメント",
+      "stars": 3,
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ああ亀頭か（コメント）",
+      "label": "ああ亀頭か（コメント）"
+    },
+    {
+      "name": "嘘だろ…",
+      "threshold": 90,
+      "title": "嘘だろ…",
+      "speaker": "コメント",
+      "stars": 3,
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 嘘だろ…（コメント）",
+      "label": "嘘だろ…（コメント）"
+    },
+    {
+      "name": "きたあああああああああああああああああああ",
+      "threshold": 90,
+      "title": "きたあああああああああああああああああああ",
+      "speaker": "コメント",
+      "stars": 3,
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: きたあああああああああああああああああああ（コメント）",
+      "label": "きたあああああああああああああああああああ（コメント）"
+    },
+    {
+      "name": "グーの顔",
+      "threshold": 90,
+      "title": "グーの顔",
+      "speaker": "コメント",
+      "stars": 3,
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: グーの顔（コメント）",
+      "label": "グーの顔（コメント）"
+    },
+    {
+      "name": "二度と名乗るな",
+      "title": "二度と名乗るな",
+      "speaker": "コメント",
+      "stars": 3,
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 二度と名乗るな（コメント）",
+      "label": "二度と名乗るな（コメント）"
+    },
+    {
+      "name": "墜落しろ",
+      "threshold": 90,
+      "title": "墜落しろ",
+      "speaker": "コメント",
+      "stars": 3,
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 墜落しろ（コメント）",
+      "label": "墜落しろ（コメント）"
+    },
+    {
+      "name": "変大",
+      "threshold": 90,
+      "title": "変大",
+      "speaker": "コメント",
+      "stars": 3,
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 変大（コメント）",
+      "label": "変大（コメント）"
+    },
+    {
+      "name": "みやぞん",
+      "threshold": 90,
+      "title": "みやぞん",
+      "speaker": "コメント",
+      "stars": 3,
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: みやぞん（コメント）",
+      "label": "みやぞん（コメント）"
+    },
+    {
+      "name": "あ～出ちゃう、出ちゃった～！",
+      "title": "あ～出ちゃう、出ちゃった～！",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "【モンスト】モーツァルト＆ハンターキングを神化しXの覚醒へ！【ヒカキンゲームズ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: あ～出ちゃう、出ちゃった～！（HIKAKIN）",
+      "label": "あ～出ちゃう、出ちゃった～！（HIKAKIN）"
+    },
+    {
+      "name": "あ〜んあ〜ん",
+      "threshold": 90,
+      "title": "あ〜んあ〜ん",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "【しょぼんのアクション】3rdステージ！ヒカキンの実況プレイ！HikakinGames",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: あ〜んあ〜ん（HIKAKIN）",
+      "label": "あ〜んあ〜ん（HIKAKIN）"
+    },
+    {
+      "name": "いやらしいね",
+      "threshold": 90,
+      "title": "いやらしいね",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "【宝くじ】ちびまる子ちゃんスクラッチで100万円を狙う！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: いやらしいね（HIKAKIN）",
+      "label": "いやらしいね（HIKAKIN）"
+    },
+    {
+      "name": "お菓子マン",
+      "threshold": 90,
+      "title": "お菓子マン",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "駄菓子500個に埋もれてみた！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: お菓子マン（HIKAKIN）",
+      "label": "お菓子マン（HIKAKIN）"
+    },
+    {
+      "name": "ガチンコ",
+      "threshold": 90,
+      "title": "ガチンコ",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "プロレーサーとガチンコレースバトル！ Racing Battle！ヒカキン vs V.I (BIGBANG)でガチンコバトルしてみたwww【ヒカキン VS セイキン】知識ゼロの二人がベイブレードバトルするとこうなりますwwwヒカキンのスーパーマリオオデッセイ実況 Part10【海の国で巨大タコとバトル 】ヒカキン vs はじめしゃちょーで素手で殴り合ったら大変なことに…【ヤンキーvs先生】ヒカキン×フォーエイトでコスプレドッジボール対決！【コナンvs犯人】【保育園児vs老人】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ガチンコ（HIKAKIN）",
+      "label": "ガチンコ（HIKAKIN）"
+    },
+    {
+      "name": "キノコの使い方を忘れている",
+      "title": "キノコの使い方を忘れている",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "【マリオカート8】100ccフラワーカップに挑戦！【ヒカキンゲームズ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: キノコの使い方を忘れている（HIKAKIN）",
+      "label": "キノコの使い方を忘れている（HIKAKIN）"
+    },
+    {
+      "name": "興奮しちゃうじゃないか",
+      "title": "興奮しちゃうじゃないか",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "【パズドラ】ハンター×ハンターコラボガチャやってみた！HikakinGames",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 興奮しちゃうじゃないか（HIKAKIN）",
+      "label": "興奮しちゃうじゃないか（HIKAKIN）"
+    },
+    {
+      "name": "これ3倍速モードしかないかぁ…",
+      "title": "これ3倍速モードしかないかぁ…",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "【青鬼2】ヒカキンの青鬼2実況プレイ Part1【ホラーゲーム】【マインクラフト】村人大増殖！をしようとしたら大惨事に…【ヒカキンのマイクラ実況 Part31】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: これ3倍速モードしかないかぁ…（HIKAKIN）",
+      "label": "これ3倍速モードしかないかぁ…（HIKAKIN）"
+    },
+    {
+      "name": "シャキシャキ！",
+      "threshold": 90,
+      "title": "シャキシャキ！",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "超小型モバイル椅子座ったらドゥルルってなったwww",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: シャキシャキ！（HIKAKIN）",
+      "label": "シャキシャキ！（HIKAKIN）"
+    },
+    {
+      "name": "スッポンポンでいいんです",
+      "title": "スッポンポンでいいんです",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "【旅動画】 一泊16万の超高級ホテル！ヒカキン&マスオ愛媛松山の旅！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: スッポンポンでいいんです（HIKAKIN）",
+      "label": "スッポンポンでいいんです（HIKAKIN）"
+    },
+    {
+      "name": "ｾｯwｸｽｩw",
+      "title": "ｾｯwｸｽｩw",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "【マリオカート ツアー】スマホ版マリオカートで大フィーバーwww【ヒカキンゲームズ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ｾｯwｸｽｩw（HIKAKIN）",
+      "label": "ｾｯwｸｽｩw（HIKAKIN）"
+    },
+    {
+      "name": "大丈夫なワケないでしょ。ふざけないで",
+      "title": "大丈夫なワケないでしょ。ふざけないで",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 大丈夫なワケないでしょ。ふざけないで（HIKAKIN）",
+      "label": "大丈夫なワケないでしょ。ふざけないで（HIKAKIN）"
+    },
+    {
+      "name": "大切にしようよ～",
+      "title": "大切にしようよ～",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "【青鬼2 校長編】ヒカキンの実況プレイ Part1【ホラーゲーム】ヒカキン密着24時 〜YouTuberの裏側〜(別角度)",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 大切にしようよ～（HIKAKIN）",
+      "label": "大切にしようよ～（HIKAKIN）"
+    },
+    {
+      "name": "食べて出した方が面白いかもね",
+      "title": "食べて出した方が面白いかもね",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "超巨大！『俺のプリン』一気食いしてみた！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 食べて出した方が面白いかもね（HIKAKIN）",
+      "label": "食べて出した方が面白いかもね（HIKAKIN）"
+    },
+    {
+      "name": "ちがうんだよ！なめてんのか！",
+      "title": "ちがうんだよ！なめてんのか！",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "スーパー店員時代のヤバい話【シュークリームブチ切れ事件】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ちがうんだよ！なめてんのか！（HIKAKIN）",
+      "label": "ちがうんだよ！なめてんのか！（HIKAKIN）"
+    },
+    {
+      "name": "地球の皆さんさようなら",
+      "title": "地球の皆さんさようなら",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "惑星チョコが綺麗すぎて感動するレベルだった…【フーシェ オリンポスチョコレート】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 地球の皆さんさようなら（HIKAKIN）",
+      "label": "地球の皆さんさようなら（HIKAKIN）"
+    },
+    {
+      "name": "はぁぁぁ！？ありえねぇ！ふざけんな！",
+      "title": "はぁぁぁ！？ありえねぇ！ふざけんな！",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "【おわた】HIKAKINとのコラボ動画データ全部なくした",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: はぁぁぁ！？ありえねぇ！ふざけんな！（HIKAKIN）",
+      "label": "はぁぁぁ！？ありえねぇ！ふざけんな！（HIKAKIN）"
+    },
+    {
+      "name": "ﾋﾝﾋﾝﾋﾝﾋﾝw",
+      "title": "ﾋﾝﾋﾝﾋﾝﾋﾝw",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "百味ビーンズをかけたジャンケン対決！ゲロ味 & 鼻くそ味を食べるのはどっち!?",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ﾋﾝﾋﾝﾋﾝﾋﾝw（HIKAKIN）",
+      "label": "ﾋﾝﾋﾝﾋﾝﾋﾝw（HIKAKIN）"
+    },
+    {
+      "name": "福島県在住の中学生の女の子その名もたまぐで",
+      "title": "福島県在住の中学生の女の子その名もたまぐで",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "【当選発表】ニンテンドースイッチ スプラトゥーン2セット10名様【プレゼント企画】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 福島県在住の中学生の女の子その名もたまぐで（HIKAKIN）",
+      "label": "福島県在住の中学生の女の子その名もたまぐで（HIKAKIN）"
+    },
+    {
+      "name": "ぶち壊してやんだよー！",
+      "title": "ぶち壊してやんだよー！",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "大量のうんちペッタンボールを本気で壁に投げつけてみた！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ぶち壊してやんだよー！（HIKAKIN）",
+      "label": "ぶち壊してやんだよー！（HIKAKIN）"
+    },
+    {
+      "name": "北海道産ほくほくポテトとチェダーチーズに焦がし醤油風味の特製オニオンソースが効いたジューシービーフバーガー",
+      "title": "北海道産ほくほくポテトとチェダーチーズに焦がし醤油風味の特製オニオンソースが効いたジューシービーフバーガー(仮)",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "ハンバーガーの名前考えると賞金140万！マクドナルド キャンペーン！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 北海道産ほくほくポテトとチェダーチーズに焦がし醤油風味の特製オニオンソースが効いたジューシービーフバーガー(仮)（HIKAKIN）",
+      "label": "北海道産ほくほくポテトとチェダーチーズに焦がし醤油風味の特製オニオンソースが効いたジューシービーフバーガー(仮)（HIKAKIN）"
+    },
+    {
+      "name": "ホワァ〜〜",
+      "threshold": 100,
+      "title": "ホワァ〜〜",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ホワァ〜〜（HIKAKIN）",
+      "label": "ホワァ〜〜（HIKAKIN）"
+    },
+    {
+      "name": "本当にすいませんでした",
+      "title": "本当にすいませんでした",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "【謝罪動画】手ぶれ補正は間違いでした",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 本当にすいませんでした（HIKAKIN）",
+      "label": "本当にすいませんでした（HIKAKIN）"
+    },
+    {
+      "name": "まあ2,3ヶ月ためてるからね",
+      "title": "まあ2,3ヶ月ためてるからね",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "【モンスト】超獣神祭で石川五右衛門(ゴエモン)狙ったら確定！かつてない神引きwオマケに獣神化天草四郎でアヴァロン【ヒカキンゲームズ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: まあ2,3ヶ月ためてるからね（HIKAKIN）",
+      "label": "まあ2,3ヶ月ためてるからね（HIKAKIN）"
+    },
+    {
+      "name": "もうピーチ嫌がってるじゃん!やめろよクッパお前は",
+      "title": "もうピーチ嫌がってるじゃん!やめろよクッパお前は",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "ヒカキンのスーパーマリオ オデッセイ実況 Part1",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: もうピーチ嫌がってるじゃん!やめろよクッパお前は（HIKAKIN）",
+      "label": "もうピーチ嫌がってるじゃん!やめろよクッパお前は（HIKAKIN）"
+    },
+    {
+      "name": "萌え萌え牛丼",
+      "title": "萌え萌え牛丼",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "Japanese Hentai Food！萌え萌え牛丼",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 萌え萌え牛丼（HIKAKIN）",
+      "label": "萌え萌え牛丼（HIKAKIN）"
+    },
+    {
+      "name": "やぁぁったぁぁあああ！！",
+      "title": "やぁぁったぁぁあああ！！",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "【モンスト】ついにゴジラ撃破！？そしてゲット！？【ヒカキンゲームズ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: やぁぁったぁぁあああ！！（HIKAKIN）",
+      "label": "やぁぁったぁぁあああ！！（HIKAKIN）"
+    },
+    {
+      "name": "をまんこをまんこをまんこ",
+      "title": "をまんこをまんこをまんこ",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: をまんこをまんこをまんこ（HIKAKIN）",
+      "label": "をまんこをまんこをまんこ（HIKAKIN）"
+    },
+    {
+      "name": "※いよいよおかしくなってきた↑",
+      "aliases": [
+        "いよおか"
+      ],
+      "threshold": 90,
+      "title": "※いよいよおかしくなってきた↑",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "iPhone5を命がけでゲット！I Bought an iPhone5！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ※いよいよおかしくなってきた↑（HIKAKIN）",
+      "label": "※いよいよおかしくなってきた↑（HIKAKIN）"
+    },
+    {
+      "name": "ガチで吐きそう→",
+      "title": "ガチで吐きそう→",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "【閲覧注意】イナゴとハチノコ無理して食べたら。。。【ゲテモノ】",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ガチで吐きそう→（HIKAKIN）",
+      "label": "ガチで吐きそう→（HIKAKIN）"
+    },
+    {
+      "name": "急にツボった→",
+      "title": "急にツボった→",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "【女の子の足の裏味の唐揚げ】がまさかの味だったwww",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: 急にツボった→（HIKAKIN）",
+      "label": "急にツボった→（HIKAKIN）"
+    },
+    {
+      "name": "←首おかしくなりました",
+      "aliases": [
+        "首おか"
+      ],
+      "threshold": 90,
+      "title": "←首おかしくなりました",
+      "speaker": "HIKAKIN",
+      "stars": 2,
+      "video": "ワンピース『くうび〜』にまたリベンジ！One Piece Girls Selection！",
+      "hotword": false,
+      "reply": "{name}「{text}」\nヒカマニ語録: ←首おかしくなりました（HIKAKIN）",
+      "label": "←首おかしくなりました（HIKAKIN）"
+    }
+  ]
+}

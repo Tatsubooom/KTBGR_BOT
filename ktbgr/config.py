@@ -77,7 +77,7 @@ def load_settings(argv: list[str] | None = None) -> Settings:
     parser.add_argument("--compute-type", default=os.getenv("WHISPER_COMPUTE_TYPE", "default"))
     parser.add_argument(
         "--keywords",
-        default=os.getenv("KEYWORDS_FILE", "keywords.json,data/inmu_goroku.json"),
+        default=os.getenv("KEYWORDS_FILE", "keywords.json,data/inmu_goroku.json,data/hikamani_goroku.json"),
         help="キーワードファイル (カンマ区切りで複数指定可)",
     )
     args = parser.parse_args(argv)

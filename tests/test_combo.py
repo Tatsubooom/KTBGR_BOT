@@ -63,10 +63,12 @@ def test_no_emoji_or_markdown_in_generated_messages():
     import re
     from pathlib import Path
 
-    data = json.loads((Path(__file__).parent.parent / "data" / "inmu_goroku.json").read_text(encoding="utf-8"))
-    keywords_file = json.loads((Path(__file__).parent.parent / "keywords.json").read_text(encoding="utf-8"))
+    root = Path(__file__).parent.parent
+    entries = []
+    for path in (root / "data" / "inmu_goroku.json", root / "data" / "hikamani_goroku.json", root / "keywords.json"):
+        entries += json.loads(path.read_text(encoding="utf-8"))["keywords"]
     decorated = re.compile(r"[\U0001F300-\U0001FAFF☀-➿️→]|\*\*")
-    for entry in data["keywords"] + keywords_file["keywords"]:
+    for entry in entries:
         for key in ("reply", "label"):
             # 語録のタイトルや発言者名自体に含まれる記号 (「うんちして♡」「YOU THE ROCK★」など) は原文なので対象外
             template = (entry.get(key) or "").replace(entry.get("title", "\0"), "").replace(entry.get("speaker", "\0"), "")

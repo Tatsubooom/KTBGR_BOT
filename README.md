@@ -133,12 +133,22 @@ python bot.py --device cpu --model base
 
 編集後は `/reload` で再起動なしに反映できます。キーワードは Whisper にもヒントとして渡されるため、固有名詞も認識されやすくなります (合計 200 文字まで)。
 
-キーワードファイルは `.env` の `KEYWORDS_FILE` にカンマ区切りで複数指定できます (デフォルト: `keywords.json,data/inmu_goroku.json`)。
+キーワードファイルは `.env` の `KEYWORDS_FILE` にカンマ区切りで複数指定できます (デフォルト: `keywords.json,data/inmu_goroku.json,data/hikamani_goroku.json`)。
+
+### 同梱の語録データ
+
+| ファイル | 内容 | 出典 |
+|---|---|---|
+| `data/inmu_goroku.json` | 淫夢語録 447件 | [真夏の夜の淫夢Wiki カテゴリ:淫夢語録](https://wiki.yjsnpi.nu/wiki/%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA:%E6%B7%AB%E5%A4%A2%E8%AA%9E%E9%8C%B2) |
+| `data/hikamani_goroku.json` | ヒカマニ語録 200件 (知名度の高い順) | [ピクシブ百科事典「ヒカマニ語録」](https://dic.pixiv.net/a/%E3%83%92%E3%82%AB%E3%83%9E%E3%83%8B%E8%AA%9E%E9%8C%B2) |
+
+ヒカマニ語録は、自動字幕の表 (事件・犯罪を連想させる誤字幕が大半) と、性暴力・殺人などを含む語録を除外しています。
 
 ### データの更新
 
 ```bash
 python scripts/fetch_inmu_goroku.py --refresh
+python scripts/fetch_hikamani_goroku.py --refresh            # --limit で件数を変更 (デフォルト 200)
 ```
 
 取得結果は `.cache/` にキャッシュされ、`--refresh` なしの場合はキャッシュからデータだけ再生成します (しきい値のルールを変えたときなど)。
