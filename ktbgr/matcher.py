@@ -1,13 +1,18 @@
 """キーワードの曖昧一致検出。
 
 Whisper の出力は同じ発話でも「漢字/ひらがな/カタカナ」表記や細かい音の聞き間違いで揺れるため、
-以下の3つの表記に正規化した上で、それぞれ類似度 (編集距離ベース) を計算し最大値をスコアとする。
+以下の3つの表記に正規化して比較する。
 
 - surface : NFKC正規化 + 小文字化 + カタカナ→ひらがな + 記号除去
 - reading : 漢字を読み (ひらがな) に変換したもの
 - romaji  : ヘボン式ローマ字 (音の近さを拾う)
 
 いずれも長音 (ー/～)・小書き文字 (ぁ→あ)・3文字以上の同じ文字の連続 (ああああ→ああ) を揃えてから比較する。
+
+一致の判定は2通りで、スコアの高い方を採用する。
+1. 聞き間違い: キーワードとほぼ同じ並びがある (編集距離ベース、類似度 85 以上)
+2. こじつけ: キーワードと発言に「内容のある」共通部分がある。漢字 2 文字以上の熟語を含むか、6 文字以上続く共通部分。
+   「しかった」「できたら」のようなひらがなの語尾だけの共通部分は、関係ない一致になりやすいので根拠にしない。
 """
 
 from __future__ import annotations
@@ -17,6 +22,7 @@ import logging
 import re
 import unicodedata
 from dataclasses import dataclass, field
+from difflib import SequenceMatcher
 from pathlib import Path
 
 import pykakasi
@@ -36,19 +42,15 @@ _MIN_FUZZY_LEN = {"surface": 3, "reading": 3, "romaji": 5}
 # 短いローマ字は完全一致でも音の区切りをまたいで誤爆する (「おつ」otsu が「バイト疲れた」baiTOTSUkareta に一致など) ので比較しない
 _MIN_EXACT_LEN = {"surface": 0, "reading": 0, "romaji": 5}
 
-# 曖昧一致に必要な最低スコア。MATCH_THRESHOLD を下げても、これより低い一致は採用しない。
-# ローマ字や短いキーワードは、長文 (歌詞の貼り付けなど) のどこかに似た並びが偶然見つかりやすいため。
-_ROMAJI_MIN_SCORE = 85
-_SHORT_NEEDLE_LEN = 7
-_SHORT_NEEDLE_MIN_SCORE = 85
+# 聞き間違い判定 (編集距離) に必要な最低スコア。MATCH_THRESHOLD を下げても、これより低い一致は採用しない。
+# 編集距離は文字がバラバラに似ているだけでもスコアが出るので、長文 (歌詞の貼り付けなど) で関係ない一致が出やすい。
+_EDIT_MIN_SCORE = 85
 
-
-def _fuzzy_floor(variant: str, needle: str) -> float:
-    if variant == "romaji":
-        return _ROMAJI_MIN_SCORE
-    if len(needle) < _SHORT_NEEDLE_LEN:
-        return _SHORT_NEEDLE_MIN_SCORE
-    return 0.0
+# こじつけ判定
+_SEED_LEN = 3  # 候補を探す手がかりにする共通部分の長さ (漢字2文字の熟語は 2)
+_CONTENT_KANA_LEN = 6  # 熟語を含まない共通部分はこの長さから「内容のある」共通部分とみなす
+_COVERAGE_BLOCK_LEN = 3  # キーワードを占める割合は、この長さ以上の共通部分で数える
+_JUKUGO_RE = re.compile(r"[一-龯々〆]{2}")  # 漢字2文字以上の並び (「全然」「試合」など)。「日も」のような1文字+送り仮名は含めない
 
 
 def _kata_to_hira(text: str) -> str:
@@ -71,7 +73,8 @@ class Forms:
 
 def to_forms(text: str) -> Forms:
     base = _kata_to_hira(unicodedata.normalize("NFKC", text).lower())
-    converted = _kakasi.convert(base)
+    # pykakasi は改行の直前の語を二重に出力する (「メシア\n喘ぎ」→「めしあめしああえぎ」) ので空白にしてから変換する
+    converted = _kakasi.convert(re.sub(r"\s+", " ", base))
     return Forms(
         surface=_clean(base, _STRIP_RE),
         reading=_clean("".join(part["hira"] for part in converted), _STRIP_RE),
@@ -103,6 +106,58 @@ def window_similarity(
     if aligned is None:
         return 0.0, 0.0, 0.0
     return aligned.score, aligned.dest_start / n, aligned.dest_end / n
+
+
+def _seed_positions(text: str) -> dict[str, list[int]]:
+    """こじつけ判定の手がかり (3文字の並び、漢字を含む2文字の並び) の出現位置。"""
+    positions: dict[str, list[int]] = {}
+    for size in (2, _SEED_LEN):
+        for i in range(len(text) - size + 1):
+            chunk = text[i : i + size]
+            if size == _SEED_LEN or _JUKUGO_RE.fullmatch(chunk):
+                positions.setdefault(chunk, []).append(i)
+    return positions
+
+
+def _is_content(chunk: str) -> bool:
+    return bool(_JUKUGO_RE.search(chunk)) or len(chunk) >= _CONTENT_KANA_LEN
+
+
+def shared_chunk_similarity(needle: str, haystack: str, positions: dict[str, list[int]]) -> tuple[float, float, float]:
+    """キーワードと発言の共通部分によるこじつけ判定。スコア (0-99) と位置 (割合) を返す。
+
+    - 内容のある共通部分があれば 70 + 30 × (キーワードを占める割合)
+    - なければ 100 × (キーワードを占める割合)。語尾だけが共通する程度では 70 に届かない
+    """
+    n = len(needle)
+    starts: set[int] = set()
+    for size in (2, _SEED_LEN):
+        for i in range(n - size + 1):
+            for p in positions.get(needle[i : i + size], ()):
+                starts.add(max(0, p - i))
+    best = (0.0, 0.0, 0.0)
+    seen: set[tuple[int, int]] = set()
+    for start in starts:
+        a, b = max(0, start - n // 2), min(len(haystack), start + n + n // 2)
+        if (a, b) in seen:
+            continue
+        seen.add((a, b))
+        window = haystack[a:b]
+        blocks = [
+            bl for bl in SequenceMatcher(None, needle, window, autojunk=False).get_matching_blocks() if bl.size >= 2
+        ]
+        if not blocks:
+            continue
+        coverage = sum(bl.size for bl in blocks if bl.size >= _COVERAGE_BLOCK_LEN) / n
+        score = coverage * 100
+        if any(_is_content(needle[bl.a : bl.a + bl.size]) for bl in blocks):
+            score = max(score, 70 + 30 * coverage)
+        score = min(score, 99.0)  # 完全一致 (100) と区別する
+        if score > best[0]:
+            first = a + min(bl.b for bl in blocks)
+            last = a + max(bl.b + bl.size for bl in blocks)
+            best = (score, first / len(haystack), last / len(haystack))
+    return best
 
 
 @dataclass
@@ -181,20 +236,27 @@ class KeywordMatcher:
         スコアの高いもの (同点なら長いもの) だけを残す。ゆるい一致で同じ箇所が何重にもカウントされるのを防ぐ。
         """
         text_forms = to_forms(text)
+        seeds = {"surface": _seed_positions(text_forms.surface), "reading": _seed_positions(text_forms.reading)}
         matches: list[Match] = []
         for keyword in self.keywords:
             threshold = keyword.threshold if keyword.threshold is not None else self.default_threshold
             best: Match | None = None
             for kw_forms in keyword.forms:
                 for (variant, needle), (_, haystack) in zip(kw_forms.items(), text_forms.items()):
-                    cutoff = max(threshold, _fuzzy_floor(variant, needle))
+                    # 聞き間違い判定 (完全一致を含む)。85 未満は採用しない
+                    edit_cutoff = max(threshold, _EDIT_MIN_SCORE)
                     score, start, end = window_similarity(
-                        needle, haystack, _MIN_FUZZY_LEN[variant], cutoff, _MIN_EXACT_LEN[variant]
+                        needle, haystack, _MIN_FUZZY_LEN[variant], edit_cutoff, _MIN_EXACT_LEN[variant]
                     )
-                    if score < cutoff:
-                        continue
-                    if best is None or score > best.score:
-                        best = Match(keyword, score, variant, start, end)
+                    candidates = [(score, start, end)] if score >= edit_cutoff else []
+                    # こじつけ判定。キーワードのしきい値で判定する (しきい値 100 のキーワードは完全一致のみ)
+                    if score < 100 and threshold < 100 and variant in seeds and len(needle) >= _SEED_LEN:
+                        chunk = shared_chunk_similarity(needle, haystack, seeds[variant])
+                        if chunk[0] >= threshold:
+                            candidates.append(chunk)
+                    for score, start, end in candidates:
+                        if best is None or score > best.score:
+                            best = Match(keyword, score, variant, start, end)
                 if best is not None and best.score >= 100:
                     break
             if best is not None and best.score >= threshold:

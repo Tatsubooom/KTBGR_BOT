@@ -60,6 +60,33 @@ def test_long_text_does_not_match_short_keywords_by_chance():
     assert set(names(matcher, lyrics)) == {"やりますねぇ！", "ブッチッパ！", "王道を征く"}
 
 
+def test_loose_match_on_shared_word():
+    # こじつけ: 熟語や長い並びが共通していれば反応する
+    matcher = KeywordMatcher([Keyword("おっ大丈夫か大丈夫か？"), Keyword("ケンちゃんまだ一回表、試合は始まったばっかりよ！")], 70)
+    assert names(matcher, "マイクの音量大丈夫?聞こえてる?") == ["おっ大丈夫か大丈夫か？"]
+    assert names(matcher, "さっきの試合惜しかったな") == ["ケンちゃんまだ一回表、試合は始まったばっかりよ！"]
+    matcher = KeywordMatcher([Keyword("いいよ、来いよ！胸にかけて！胸に！")], 70)
+    assert names(matcher, "いいよ！こいよ！ 我ら包む抱擁") == ["いいよ、来いよ！胸にかけて！胸に！"]
+
+
+def test_no_match_on_shared_grammar_only():
+    # 関係ない: 語尾や助詞だけが共通する場合は反応しない
+    matcher = KeywordMatcher(
+        [Keyword("10が、すごく欲しかったんですよね"), Keyword("ドジョウと俺のさ、子供ができたらどうする？"),
+         Keyword("ラグビーってなんだよ"), Keyword("大切にしようよ～"), Keyword("今日も俺、恥ずかしい姿いっぱい晒すよ？")],
+        70,
+    )
+    for text in ["さっきの試合惜しかったな", "駅前に新しいカフェできたらしいよ", "明日の会議って何時からだっけ",
+                 "昼ごはん何にしようかな", "明日も早いからもう寝るね"]:
+        assert names(matcher, text) == [], text
+
+
+def test_newline_does_not_duplicate_words():
+    from ktbgr.matcher import to_forms
+
+    assert to_forms("メシア\n喘ぎ声").reading == to_forms("メシア 喘ぎ声").reading == "めしああえぎこえ"
+
+
 def test_disabled_keyword_is_ignored():
     matcher = KeywordMatcher([Keyword("そう…", enabled=False)], 80)
     assert names(matcher, "そう…") == []
